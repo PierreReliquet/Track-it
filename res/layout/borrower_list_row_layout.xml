@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/borrower_list_row_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:textIsSelectable="true"
+        android:gravity="left" />
+
+    <TextView
+        android:id="@+id/borrower_list_row_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:textIsSelectable="true"
+        android:gravity="left" />
+     
+     <TextView
+        android:id="@+id/borrower_list_row_average_time"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:textIsSelectable="true"
+        android:gravity="left" />
+     
+     <TextView
+        android:id="@+id/borrower_list_row_number_loans"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:textIsSelectable="true"
+        android:gravity="left" />
+
+</LinearLayout>
