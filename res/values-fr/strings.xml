@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App  -->
+    <string name="app_name">Gestionnaire de prêt</string>
+    <string name="action_settings">Paramètres</string>
+    
+    <!-- Menu -->
+    <string name="menu_add_loan">Ajouter un nouveau prêt</string>
+    <string name="menu_list_loans">Lister les prêts en cours</string>
+    <string name="menu_list_borrowers">Lister les emprunteurs</string>
+    <string name="menu_close_loan">Fermer un prêt</string>
+    <string name="menu_logo">Gestionnaire de prêts</string>
+    <string name="menu_list_products">Lister les produits</string>
+    
+    <!-- Title -->
+    <string name="title_activity_list_borrowers">Liste des emprunteurs</string>
+    <string name="title_activity_list_loans">Liste des prêts</string>
+   
+    <!-- Loan -->
+    <string name="loan_successfully_added">Le prêt a bien été ajouté</string>
+    <string name="loan_add_button">Ajouter le prêt</string>
+    <string name="loan_start_date">Date de début: </string>
+    
+    <!-- Product -->
+    <string name="product_barcode_hint">Veuillez saisir le code-barre du produit</string>
+    <string name="product_name">Nom du produit</string>
+    <string name="product_name_hint">Veuillez saisir le nom du produit</string>
+    <string name="product_display">Produit: </string>
+    
+    <!-- Borrower -->
+    <string name="borrower_name_hint">Veuillez saisir le nom de l\'emprunteur</string>
+    <string name="borrower_name">Nom de l\'emprunteur</string>
+    <string name="borrower_display">Emprunteur: </string>
+    
+    <!-- Miscellaneous -->
+    <string name="internet_looking">Recherche du titre sur internet</string>
+    <string name="go_store">Confirmer l\'accès au play store</string>
+    <string name="store_confirmation">Vous allez être redirigé vers le market pour télécharger un lecteur de code-barre. Êtes-vous d\'accord ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
+</resources>
