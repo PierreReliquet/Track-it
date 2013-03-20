@@ -84,4 +84,9 @@ public class Borrower {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return getId() + ": " + getName();
+    }
+
 }
