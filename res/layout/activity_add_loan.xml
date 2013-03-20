@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context=".Menu" >
+    
+    
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="0.15"
+	    >
+	    
+	    <EditText
+	        android:id="@+id/barcode"
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:layout_weight="0.80"
+	        android:ems="10"
+	        android:inputType="number" 
+	        android:hint="@string/product_barcode_hint"
+	        >
+        	<requestFocus />
+    	</EditText>
+    	<ImageButton
+		    android:id="@+id/scan_barcode"
+		    android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:layout_weight="0.2"
+		    android:src="@drawable/camera" 
+	    />
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="0.15"
+	    >
+    	
+	    <TextView
+	    android:id="@+id/add_loan_borrower_name"
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="0.25"
+	    android:gravity="center_vertical"
+	    android:textAppearance="?android:attr/textAppearanceSmall"
+	    android:text="@string/product_name" />
+	    
+	    <EditText
+	    android:id="@+id/add_loan_input_title"
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="0.75"
+	    android:inputType="textMultiLine"
+	    android:hint="@string/product_name_hint"
+	    android:ems="10" />
+	    
+	</LinearLayout>
+
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="0.15"
+	    >
+
+		<TextView
+		    android:id="@+id/add_loan_borrower_name"
+		    android:layout_width="0dp"
+		    android:layout_height="match_parent"
+		    android:gravity="center_vertical"
+		    android:layout_weight="0.25"
+		    android:textAppearance="?android:attr/textAppearanceSmall"
+		    android:text="@string/borrower_name" />
+
+		<AutoCompleteTextView
+		    android:id="@+id/add_loan_borrower_name_input"
+		    android:layout_width="0dp"
+		    android:layout_height="match_parent"
+		    android:layout_weight="0.75"
+		    android:ems="10"
+		    android:hint="@string/borrower_name_hint" />
+	
+	</LinearLayout>
+	
+    <Button
+	    android:id="@+id/add_loan_button"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="0.1"
+	    android:text="@string/loan_add_button" 
+    />
+    
+</LinearLayout>
