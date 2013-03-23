@@ -1,5 +1,7 @@
 package org.pierrrrrrrot.loanmanager.model;
 
+import org.apache.commons.lang.WordUtils;
+
 public class Borrower {
 
     private int id;
@@ -13,8 +15,8 @@ public class Borrower {
 
     public Borrower(int id, String name) {
         super();
-        this.id = id;
-        this.name = name;
+        setId(id);
+        setName(name);
     }
 
     /**
@@ -44,7 +46,7 @@ public class Borrower {
      *            the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = WordUtils.capitalizeFully(name, new char[] { ' ', '-' });
     }
 
     /**

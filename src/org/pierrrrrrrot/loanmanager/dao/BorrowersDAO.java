@@ -5,6 +5,7 @@ package org.pierrrrrrrot.loanmanager.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.pierrrrrrrot.loanmanager.model.Borrower;
 
@@ -14,7 +15,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * @author preliquet
+ * @author Pierre Reliquet
  * 
  */
 public class BorrowersDAO extends DBHelper {
@@ -77,6 +78,7 @@ public class BorrowersDAO extends DBHelper {
     }
 
     public Borrower getBorrowerByName(String name) {
+        name = name.toLowerCase(Locale.getDefault()).trim();
         Borrower b = null;
         Cursor c = getReadableDatabase().query(BORROWERS_TABLE, null,
                 BORROWERS_COLUMN_NAME + " LIKE ?", new String[] { name }, null,
@@ -108,7 +110,8 @@ public class BorrowersDAO extends DBHelper {
         ContentValues values = new ContentValues();
         // The id is automatically added
         // values.put(BORROWERS_COLUMN_ID, aBorrower.getId());
-        values.put(BORROWERS_COLUMN_NAME, aBorrower.getName());
+        values.put(BORROWERS_COLUMN_NAME,
+                aBorrower.getName().toLowerCase(Locale.getDefault()).trim());
         values.put(BORROWERS_COLUMN_NUMBER_OF_LOANS,
                 aBorrower.getNumberOfLoans());
         values.put(BORROWERS_COLUMN_AVERAGE_LOAN_TIME,
