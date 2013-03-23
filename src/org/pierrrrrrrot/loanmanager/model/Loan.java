@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Loan {
 
+    private long id;
     private Product product;
     private Borrower borrower;
     private Date date;
@@ -78,6 +79,21 @@ public class Loan {
      */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

@@ -4,8 +4,8 @@ public class Borrower {
 
     private int id;
     private String name;
-    private int averageTime = 0;
-    private int loansAmount = 0;
+    private long averageTime = 0;
+    private int numberOfLoans = 0;
 
     public Borrower() {
 
@@ -50,7 +50,7 @@ public class Borrower {
     /**
      * @return the averageTime
      */
-    public int getAverageTime() {
+    public long getAverageTime() {
         return averageTime;
     }
 
@@ -58,23 +58,23 @@ public class Borrower {
      * @param averageTime
      *            the averageTime to set
      */
-    public void setAverageTime(int averageTime) {
+    public void setAverageTime(long averageTime) {
         this.averageTime = averageTime;
     }
 
     /**
      * @return the loansAmount
      */
-    public int getLoansAmount() {
-        return loansAmount;
+    public int getNumberOfLoans() {
+        return numberOfLoans;
     }
 
     /**
      * @param loansAmount
      *            the loansAmount to set
      */
-    public void setLoansAmount(int loansAmount) {
-        this.loansAmount = loansAmount;
+    public void setNumberOfLoans(int loansAmount) {
+        this.numberOfLoans = loansAmount;
     }
 
     @Override
