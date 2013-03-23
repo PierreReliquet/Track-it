@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-     <!-- App  -->
+    <!-- App -->
     <string name="app_name">Loan Manager</string>
     <string name="action_settings">Settings</string>
-    
+
     <!-- Menu -->
     <string name="menu_add_loan">Add a new loan</string>
     <string name="menu_list_loans">List loans</string>
@@ -12,32 +12,49 @@
     <string name="menu_close_loan">Close a loan</string>
     <string name="menu_logo">Loan Manager: Don\'t lose your stuff anymore!</string>
     <string name="menu_list_products">List products</string>
-    
+
     <!-- Title -->
-    <string name="title_activity_list_borrowers">Liste borrowers</string>
-    <string name="title_activity_list_loans">Liste loans</string>
-   
+    <string name="title_activity_list_borrowers">List borrowers</string>
+    <string name="title_activity_list_loans">List loans</string>
+    <string name="title_activity_list_products">List Products</string>
+    <string name="title_activity_close_loan">Close Loan</string>
+
     <!-- Loan -->
     <string name="loan_successfully_added">Loan was added successfully!</string>
     <string name="loan_add_button">Add the loan</string>
-    <string name="loan_start_date">Start date: </string>
-    
+    <string name="loan_start_date">"Start date: "</string>
+    <string name="loan_end_date">"End date: "</string>
+    <string name="confirm_closing_title">Closing the loan</string>
+    <string name="confirm_closing_content">Do you confirm that the object is back?</string>
+    <string name="still_active">Still active</string>
+
     <!-- Product -->
     <string name="product_barcode_hint">Enter the barcode</string>
     <string name="product_name">Product\'s name</string>
     <string name="product_name_hint">Enter the name of the product</string>
-    <string name="product_display">Product: </string>
-    
+    <string name="product_display">"Product: "</string>
+    <string name="product_barcode">Barcode: %d</string>
+    <string name="product_title">Title: %s</string>
+    <string name="product_additional_info">Additional information: %d</string>
+    <string name="product_additional_info_input_title">"Additional information: "</string>
+    <string name="product_additional_info_hint">(Not required) Enter additional information about the product</string>
+
     <!-- Borrower -->
     <string name="borrower_name_hint">Enter the name of the borrower</string>
     <string name="borrower_name">Borrower\'s name</string>
-    <string name="borrower_display">Borrower: </string>
-    
+    <string name="borrower_display">"Borrower: "</string>
+    <string name="borrower_id">Identifier: %d</string>
+    <string name="borrower_name_adapter">Name: %s</string>
+    <string name="borrower_average_time">Average loan time: %d days</string>
+    <string name="borrower_number_of_loans">Number of loans: %d</string>
+    <string name="borrower_number_of_active_loans">Number of active loans: %d</string>
+
     <!-- Miscellaneous -->
     <string name="internet_looking">Looking for the title on the internet</string>
     <string name="go_store">Confirm the play store access</string>
     <string name="store_confirmation">You are going to be redirected towards the market to download a barcode scanner. Do you agree ?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="ic_launcher_description">The boomerang: logo of the app</string>
 
 </resources>

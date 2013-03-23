@@ -7,31 +7,47 @@
     
     <!-- Menu -->
     <string name="menu_add_loan">Ajouter un nouveau prêt</string>
-    <string name="menu_list_loans">Lister les prêts en cours</string>
+    <string name="menu_list_loans">Lister les prêts</string>
     <string name="menu_list_borrowers">Lister les emprunteurs</string>
     <string name="menu_close_loan">Fermer un prêt</string>
+    <string name="loan_end_date">"Date de fin: "</string>
     <string name="menu_logo">Gestionnaire de prêts</string>
     <string name="menu_list_products">Lister les produits</string>
     
     <!-- Title -->
     <string name="title_activity_list_borrowers">Liste des emprunteurs</string>
     <string name="title_activity_list_loans">Liste des prêts</string>
+    <string name="title_activity_list_products">Lister les produits</string>
+    <string name="title_activity_close_loan">Fermer un prêt</string>
    
     <!-- Loan -->
     <string name="loan_successfully_added">Le prêt a bien été ajouté</string>
     <string name="loan_add_button">Ajouter le prêt</string>
-    <string name="loan_start_date">Date de début: </string>
+    <string name="loan_start_date">"Date de début: "</string>
+    <string name="confirm_closing_title">Fermeture de prêt</string>
+    <string name="confirm_closing_content">Confirmez-vous avoir récupéré votre objet?</string>
+    <string name="still_active">En cours</string>
     
     <!-- Product -->
     <string name="product_barcode_hint">Veuillez saisir le code-barre du produit</string>
     <string name="product_name">Nom du produit</string>
     <string name="product_name_hint">Veuillez saisir le nom du produit</string>
-    <string name="product_display">Produit: </string>
+    <string name="product_display">"Produit: "</string>
+    <string name="product_barcode">Code-barre: %d</string>
+    <string name="product_title">Titre: %s</string>
+    <string name="product_additional_info">Informations supplémentaires: %s</string>
+    <string name="product_additional_info_input_title">"Informations supplémentaires: "</string>
+    <string name="product_additional_info_hint">(Non requis) Indiquer les informations supplémentaires sur le produit</string>
     
     <!-- Borrower -->
     <string name="borrower_name_hint">Veuillez saisir le nom de l\'emprunteur</string>
     <string name="borrower_name">Nom de l\'emprunteur</string>
-    <string name="borrower_display">Emprunteur: </string>
+    <string name="borrower_display">"Emprunteur: "</string>
+    <string name="borrower_id">Identifiant: %d</string>
+    <string name="borrower_name_adapter">Nom: %s</string>
+    <string name="borrower_average_time">Durée moyenne des prêts: %d jours</string>
+    <string name="borrower_number_of_loans">Nombre d\'emprunts: %d</string>
+    <string name="borrower_number_of_active_loans">Nombre d\'emprunts en cours: %d</string>
     
     <!-- Miscellaneous -->
     <string name="internet_looking">Recherche du titre sur internet</string>
@@ -39,5 +55,6 @@
     <string name="store_confirmation">Vous allez être redirigé vers le market pour télécharger un lecteur de code-barre. Êtes-vous d\'accord ?</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="ic_launcher_description">Le boomerang: logo de l\'application</string>
 
 </resources>
