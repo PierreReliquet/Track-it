@@ -24,7 +24,7 @@ public class ListLoans extends Activity {
         setContentView(R.layout.activity_list_loans);
         // Show the Up button in the action bar.
         setupActionBar();
-        loansDAO = new LoansDAO(this);
+        loansDAO = LoansDAO.getInstance();
         loans = (ListView) findViewById(R.id.list_loans_list);
         List<Loan> loansList = loansDAO.getAllLoans();
         LoansAdapter loansAdapter = new LoansAdapter(this,

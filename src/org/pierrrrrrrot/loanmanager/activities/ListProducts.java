@@ -3,57 +3,37 @@ package org.pierrrrrrrot.loanmanager.activities;
 import java.util.List;
 
 import org.pierrrrrrrot.loanmanager.R;
-import org.pierrrrrrrot.loanmanager.dao.BorrowersDAO;
-import org.pierrrrrrrot.loanmanager.model.Borrower;
-import org.pierrrrrrrot.loanmanager.view.BorrowersAdapter;
+import org.pierrrrrrrot.loanmanager.dao.ProductsDAO;
+import org.pierrrrrrrot.loanmanager.model.Product;
+import org.pierrrrrrrot.loanmanager.view.ProductAdapter;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class ListBorrowers extends Activity {
+public class ListProducts extends Activity {
 
-    private BorrowersDAO borrowersDAO;
-    private BorrowersAdapter adapter;
+    private ProductsDAO productsDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_borrowers);
+        setContentView(R.layout.activity_list_products);
         // Show the Up button in the action bar.
         setupActionBar();
 
-        borrowersDAO = BorrowersDAO.getInstance();
+        productsDAO = ProductsDAO.getInstance();
 
-        ListView borrowers = (ListView) findViewById(R.id.list_borrowers_list);
-        List<Borrower> borrowersList = borrowersDAO.getAllBorrowers();
-        adapter = new BorrowersAdapter(this, R.layout.borrower_list_row_layout,
-                borrowersList);
-        borrowers.setAdapter(adapter);
-        borrowers.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
-                startCloseLoan(position);
-            }
-
-        });
-    }
-
-    private void startCloseLoan(int positionClicked) {
-        Intent closeLoan = new Intent(this, CloseLoan.class);
-        closeLoan.putExtra(CloseLoan.INTENT_CODE_CLOSE_LOAN_BORROWER_ID, ""
-                + adapter.getBorrowers().get(positionClicked).getId());
-        startActivity(closeLoan);
+        ListView products = (ListView) findViewById(R.id.list_products_list);
+        List<Product> productsList = productsDAO.getAllProducts();
+        ProductAdapter adapter = new ProductAdapter(this,
+                R.layout.product_list_row_layout, productsList);
+        products.setAdapter(adapter);
     }
 
     /**
@@ -69,7 +49,7 @@ public class ListBorrowers extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.list_borrowers, menu);
+        getMenuInflater().inflate(R.menu.list_products, menu);
         return true;
     }
 
