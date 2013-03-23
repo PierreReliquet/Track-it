@@ -56,6 +56,10 @@ public class AddLoan extends Activity {
      * The input to store the title of the product
      */
     private EditText productTitle;
+    /**
+     * Additional info about the product
+     */
+    private EditText productInfo;
 
     /**
      * The field to autocomplete the available borrowers
@@ -84,9 +88,9 @@ public class AddLoan extends Activity {
         setContentView(R.layout.activity_add_loan);
         setupActionBar();
 
-        loansDAO = new LoansDAO(this);
-        borrowerDAO = new BorrowersDAO(this);
-        produtsDAO = new ProductsDAO(this);
+        borrowerDAO = BorrowersDAO.getInstance();
+        produtsDAO = ProductsDAO.getInstance();
+        loansDAO = LoansDAO.getInstance();
 
         initializeProductFields();
         initializeBorrowerFields();
@@ -131,6 +135,7 @@ public class AddLoan extends Activity {
         productBarcode = (EditText) findViewById(R.id.barcode);
         productTitle = (EditText) findViewById(R.id.add_loan_input_title);
         scanBarcode.setOnClickListener(scanCodeListener);
+        productInfo = (EditText) findViewById(R.id.add_loan_product_additional_info_input);
     }
 
     /**
@@ -250,6 +255,9 @@ public class AddLoan extends Activity {
             Product tmp = produtsDAO.getProductByBarcode(barcode);
             if (tmp == null) {
                 tmp = new Product(Long.parseLong(barcode), productName);
+                if (!Utils.isNullOrEmpty(productInfo.getText().toString())) {
+                    tmp.setInfo(productInfo.getText().toString());
+                }
                 produtsDAO.insertProduct(tmp);
                 tmp = produtsDAO.getProductByBarcode(barcode);
             }
