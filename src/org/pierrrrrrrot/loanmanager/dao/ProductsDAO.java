@@ -1,3 +1,19 @@
+/**
+ * Copyright 2013 Pierre Reliquet©
+ * 
+ * Loans Manager is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ */
 package org.pierrrrrrrot.loanmanager.dao;
 
 import java.util.ArrayList;
@@ -11,29 +27,36 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class ProductsDAO extends DBHelper {
-
-    private static final String PRODUCTS_TABLE = "products";
-    private static final String PRODUCTS_COLUMN_ID = "ID";
-    private static final String PRODUCTS_COLUMN_NAME = "NAME";
-    private static final String PRODUCTS_COLUMN_INFO = "INFO";
-
-    private static final String PRODUCTS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS  "
-            + PRODUCTS_TABLE
-            + " ("
-            + PRODUCTS_COLUMN_ID
-            + " INTEGER PRIMARY KEY,"
-            + PRODUCTS_COLUMN_NAME
-            + " TEXT NOT NULL," + PRODUCTS_COLUMN_INFO + " TEXT" + ");";
-
-    private static final String PRODUCTS_TABLE_DROP = " DROP TABLE "
-            + PRODUCTS_TABLE + ";";
-
-    private static volatile ProductsDAO instance = null;
-
-    protected ProductsDAO(Context context) {
-        super(context);
+    
+    private static volatile ProductsDAO instance              = null;
+    private static final String         PRODUCTS_COLUMN_ID    = "ID";
+    private static final String         PRODUCTS_COLUMN_INFO  = "INFO";
+    private static final String         PRODUCTS_COLUMN_NAME  = "NAME";
+    
+    private static final String         PRODUCTS_TABLE        = "products";
+    
+    private static final String         PRODUCTS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS  "
+                                                                      + PRODUCTS_TABLE
+                                                                      + " ("
+                                                                      + PRODUCTS_COLUMN_ID
+                                                                      + " INTEGER PRIMARY KEY,"
+                                                                      + PRODUCTS_COLUMN_NAME
+                                                                      + " TEXT NOT NULL,"
+                                                                      + PRODUCTS_COLUMN_INFO
+                                                                      + " TEXT"
+                                                                      + ");";
+    
+    private static final String         PRODUCTS_TABLE_DROP   = " DROP TABLE "
+                                                                      + PRODUCTS_TABLE
+                                                                      + ";";
+    
+    public static ProductsDAO getInstance() {
+        if (ProductsDAO.instance == null) {
+            throw new RuntimeException("The init method should be called first");
+        }
+        return ProductsDAO.instance;
     }
-
+    
     public static void init(Context context) {
         if (ProductsDAO.instance == null) {
             synchronized (ProductsDAO.class) {
@@ -43,69 +66,67 @@ public class ProductsDAO extends DBHelper {
             }
         }
     }
-
-    public static ProductsDAO getInstance() {
-        if (ProductsDAO.instance == null) {
-            throw new RuntimeException("The init method should be called first");
+    
+    protected ProductsDAO(Context context) {
+        super(context);
+    }
+    
+    private Product createProductFromCursor(Cursor c) {
+        Product p = new Product();
+        p.setBarcode(Long.parseLong(this.getStringFromColumn(c,
+                PRODUCTS_COLUMN_ID)));
+        p.setTitle(this.getStringFromColumn(c, PRODUCTS_COLUMN_NAME));
+        p.setInfo(this.getStringFromColumn(c, PRODUCTS_COLUMN_INFO));
+        return p;
+    }
+    
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<Product>();
+        Cursor product = this.getReadableDatabase().query(PRODUCTS_TABLE, null,
+                null, null, null, null, PRODUCTS_COLUMN_ID);
+        while (product.moveToNext()) {
+            products.add(this.createProductFromCursor(product));
         }
-        return ProductsDAO.instance;
+        product.close();
+        this.getReadableDatabase().close();
+        return products;
     }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(PRODUCTS_TABLE_CREATE);
+    
+    public Product getProductByBarcode(String barcode) {
+        Product p = null;
+        Cursor c = this.getReadableDatabase().query(PRODUCTS_TABLE, null,
+                PRODUCTS_COLUMN_ID + "=?", new String[] { barcode }, null,
+                null, PRODUCTS_COLUMN_ID);
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            p = this.createProductFromCursor(c);
+        } else {
+            c.close();
+            this.getReadableDatabase().close();
+            return (Product) NO_MATCHING;
+        }
+        c.close();
+        this.getReadableDatabase().close();
+        return p;
     }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(PRODUCTS_TABLE_DROP);
-        onCreate(db);
-    }
-
+    
     public void insertProduct(Product aProduct) {
         ContentValues values = new ContentValues();
         values.put(PRODUCTS_COLUMN_ID, aProduct.getBarcode());
         values.put(PRODUCTS_COLUMN_NAME, aProduct.getTitle());
         values.put(PRODUCTS_COLUMN_INFO, aProduct.getInfo());
-        insertObject(PRODUCTS_TABLE, values);
+        this.insertObject(PRODUCTS_TABLE, values);
     }
-
-    public Product getProductByBarcode(String barcode) {
-        Product p = null;
-        Cursor c = getReadableDatabase().query(PRODUCTS_TABLE, null,
-                PRODUCTS_COLUMN_ID + "=?", new String[] { barcode }, null,
-                null, PRODUCTS_COLUMN_ID);
-        if (c.getCount() > 0) {
-            c.moveToFirst();
-            p = createProductFromCursor(c);
-        } else {
-            c.close();
-            getReadableDatabase().close();
-            return (Product) NO_MATCHING;
-        }
-        c.close();
-        getReadableDatabase().close();
-        return p;
+    
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(PRODUCTS_TABLE_CREATE);
     }
-
-    public List<Product> getAllProducts() {
-        List<Product> products = new ArrayList<Product>();
-        Cursor product = getReadableDatabase().query(PRODUCTS_TABLE, null,
-                null, null, null, null, PRODUCTS_COLUMN_ID);
-        while (product.moveToNext()) {
-            products.add(createProductFromCursor(product));
-        }
-        product.close();
-        getReadableDatabase().close();
-        return products;
+    
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(PRODUCTS_TABLE_DROP);
+        this.onCreate(db);
     }
-
-    private Product createProductFromCursor(Cursor c) {
-        Product p = new Product();
-        p.setBarcode(Long.parseLong(getStringFromColumn(c, PRODUCTS_COLUMN_ID)));
-        p.setTitle(getStringFromColumn(c, PRODUCTS_COLUMN_NAME));
-        p.setInfo(getStringFromColumn(c, PRODUCTS_COLUMN_INFO));
-        return p;
-    }
-
+    
 }

@@ -1,3 +1,19 @@
+/**
+ * Copyright 2013 Pierre Reliquet©
+ * 
+ * Loans Manager is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ */
 package org.pierrrrrrrot.loanmanager.dao;
 
 import android.content.ContentValues;
@@ -14,20 +30,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  * 
  */
 public class DBHelper extends SQLiteOpenHelper {
-
-    protected static final String DB_NAME = "loanmanager.db";
-    protected static final int DB_VERSION = 1;
-
-    public static final Object NO_MATCHING = null;
-
-    protected DBHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
-        onCreate(getWritableDatabase());
-        getWritableDatabase().close();
-        // for development purposes only
-        // onUpgrade(getWritableDatabase(), 0, 1);
-    }
-
+    
+    protected static final String DB_NAME     = "loanmanager.db";
+    protected static final int    DB_VERSION  = 1;
+    
+    public static final Object    NO_MATCHING = null;
+    
     /**
      * This method is made to ensure that the initialization of the DB is going
      * to be properly made
@@ -39,22 +47,30 @@ public class DBHelper extends SQLiteOpenHelper {
         BorrowersDAO.init(context);
         LoansDAO.init(context);
     }
-
-    protected void insertObject(String table, ContentValues values) {
-        getWritableDatabase().insert(table, null, values);
-        getWritableDatabase().close();
+    
+    protected DBHelper(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+        this.onCreate(this.getWritableDatabase());
+        this.getWritableDatabase().close();
+        // for development purposes only
+        // onUpgrade(getWritableDatabase(), 0, 1);
     }
-
+    
     protected String getStringFromColumn(Cursor c, String column) {
         return c.getString(c.getColumnIndex(column));
     }
-
+    
+    protected void insertObject(String table, ContentValues values) {
+        this.getWritableDatabase().insert(table, null, values);
+        this.getWritableDatabase().close();
+    }
+    
     @Override
     public void onCreate(SQLiteDatabase db) {
     }
-
+    
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
-
+    
 }

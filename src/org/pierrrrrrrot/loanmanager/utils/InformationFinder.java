@@ -1,5 +1,18 @@
 /**
+ * Copyright 2013 Pierre Reliquet©
  * 
+ * Loans Manager is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
 package org.pierrrrrrrot.loanmanager.utils;
 
@@ -17,16 +30,17 @@ import org.apache.commons.lang.StringEscapeUtils;
  * 
  */
 public class InformationFinder {
-
-    private static final String SEARCH_LINK = "http://www.amazon.fr/s/ref=nb_sb_noss/";
-    private static final String SEARCH_LINK_END = "?__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&url=search-alias%3Daps&field-keywords=";
-    private static final String SEPARATOR = "-";
-    private static final String START_PATTERN = "<div id=\"result_0\"";
-    private static final String END_PATTERN = "</h3>";
+    
+    private static final String END_PATTERN       = "</h3>";
+    private static final String END_SUB_PATTERN   = "</span>";
+    private static final Random RANDOM            = new Random(
+                                                          new Date().getTime());
+    private static final String SEARCH_LINK       = "http://www.amazon.fr/s/ref=nb_sb_noss/";
+    private static final String SEARCH_LINK_END   = "?__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&url=search-alias%3Daps&field-keywords=";
+    private static final String SEPARATOR         = "-";
+    private static final String START_PATTERN     = "<div id=\"result_0\"";
     private static final String START_SUB_PATTERN = "<span class=\"lrg bold\">";
-    private static final String END_SUB_PATTERN = "</span>";
-    private static final Random RANDOM = new Random(new Date().getTime());
-
+    
     public static String findTitleFromBarcode(String barcode)
             throws IOException {
         int first = RANDOM.nextInt(), second = RANDOM.nextInt(), third = RANDOM
@@ -48,5 +62,5 @@ public class InformationFinder {
         parsing = parsing.substring(0, parsing.indexOf(END_SUB_PATTERN));
         return StringEscapeUtils.unescapeHtml(parsing);
     }
-
+    
 }

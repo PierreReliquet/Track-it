@@ -1,3 +1,19 @@
+/**
+ * Copyright 2013 Pierre Reliquet©
+ * 
+ * Loans Manager is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ */
 package org.pierrrrrrrot.loanmanager.activities;
 
 import java.util.List;
@@ -20,32 +36,32 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class CloseLoan extends Activity {
-
-    public static final int INTENT_CODE_CLOSE_LOAN = 7778;
+    
+    public static final int    INTENT_CODE_CLOSE_LOAN             = 7778;
     public static final String INTENT_CODE_CLOSE_LOAN_BORROWER_ID = "BORROWER";
-
-    private ListView loans;
-    private LoansDAO loansDAO;
-    private LoansAdapter adapter;
-    private String borrowerId;
-
+    
+    private LoansAdapter       adapter;
+    private String             borrowerId;
+    private ListView           loans;
+    private LoansDAO           loansDAO;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_loans);
+        this.setContentView(R.layout.activity_list_loans);
         // Show the Up button in the action bar.
-        setupActionBar();
-        borrowerId = getIntent().getStringExtra(
+        this.setupActionBar();
+        this.borrowerId = this.getIntent().getStringExtra(
                 INTENT_CODE_CLOSE_LOAN_BORROWER_ID);
-
-        loansDAO = LoansDAO.getInstance();
-        loans = (ListView) findViewById(R.id.list_loans_list);
-        refreshUI();
-        adapter = new LoansAdapter(this, R.layout.loan_row_layout,
-                loansDAO.getAllNonFinishedLoans(borrowerId));
-        loans.setAdapter(adapter);
-        loans.setOnItemClickListener(new OnItemClickListener() {
-
+        
+        this.loansDAO = LoansDAO.getInstance();
+        this.loans = (ListView) this.findViewById(R.id.list_loans_list);
+        this.refreshUI();
+        this.adapter = new LoansAdapter(this, R.layout.loan_row_layout,
+                this.loansDAO.getAllNonFinishedLoans(this.borrowerId));
+        this.loans.setAdapter(this.adapter);
+        this.loans.setOnItemClickListener(new OnItemClickListener() {
+            
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     final int position, long id) {
@@ -63,28 +79,31 @@ public class CloseLoan extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog,
                                     int which) {
-                                Loan l = adapter.getLoans().get(position);
-                                loansDAO.closeLoan(l);
-                                refreshUI();
+                                Loan l = CloseLoan.this.adapter.getLoans().get(
+                                        position);
+                                CloseLoan.this.loansDAO.closeLoan(l);
+                                CloseLoan.this.refreshUI();
                             }
                         }).show();
             }
         });
     }
-
+    
     private void refreshUI() {
-        List<Loan> loansList = loansDAO.getAllNonFinishedLoans(borrowerId);
-        adapter = new LoansAdapter(this, R.layout.loan_row_layout, loansList);
-        loans.setAdapter(adapter);
+        List<Loan> loansList = this.loansDAO
+                .getAllNonFinishedLoans(this.borrowerId);
+        this.adapter = new LoansAdapter(this, R.layout.loan_row_layout,
+                loansList);
+        this.loans.setAdapter(this.adapter);
     }
-
+    
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void setupActionBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 }

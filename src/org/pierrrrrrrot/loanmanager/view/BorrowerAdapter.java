@@ -1,3 +1,19 @@
+/**
+ * Copyright 2013 Pierre Reliquet©
+ * 
+ * Loans Manager is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ */
 package org.pierrrrrrrot.loanmanager.view;
 
 import java.util.ArrayList;
@@ -16,90 +32,107 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 public class BorrowerAdapter extends ArrayAdapter<Borrower> {
-
+    
+    class BorrowerHolder {
+        TextView name;
+    }
+    
     private final List<Borrower> borrowers;
+    private final Context        context;
+    private final int            layoutResourceId;
+    
+    Filter                       nameFilter  = new Filter() {
+                                                 @Override
+                                                 public String convertResultToString(
+                                                         Object resultValue) {
+                                                     String str = ((Borrower) (resultValue))
+                                                             .getName();
+                                                     return str;
+                                                 }
+                                                 
+                                                 @Override
+                                                 protected FilterResults performFiltering(
+                                                         CharSequence constraint) {
+                                                     if (constraint != null) {
+                                                         BorrowerAdapter.this.suggestions
+                                                                 .clear();
+                                                         for (Borrower b : BorrowerAdapter.this.borrowers) {
+                                                             if (b.getName()
+                                                                     .toLowerCase()
+                                                                     .startsWith(
+                                                                             constraint
+                                                                                     .toString()
+                                                                                     .toLowerCase())) {
+                                                                 BorrowerAdapter.this.suggestions
+                                                                         .add(b);
+                                                             }
+                                                         }
+                                                         FilterResults filterResults = new FilterResults();
+                                                         filterResults.values = BorrowerAdapter.this.suggestions;
+                                                         filterResults.count = BorrowerAdapter.this.suggestions
+                                                                 .size();
+                                                         return filterResults;
+                                                     } else {
+                                                         return new FilterResults();
+                                                     }
+                                                 }
+                                                 
+                                                 @Override
+                                                 protected void publishResults(
+                                                         CharSequence constraint,
+                                                         FilterResults results) {
+                                                     ArrayList<Borrower> filteredList = (ArrayList<Borrower>) results.values;
+                                                     if ((results != null)
+                                                             && (results.count > 0)) {
+                                                         BorrowerAdapter.this
+                                                                 .clear();
+                                                         for (Borrower c : filteredList) {
+                                                             BorrowerAdapter.this
+                                                                     .add(c);
+                                                         }
+                                                         BorrowerAdapter.this
+                                                                 .notifyDataSetChanged();
+                                                     }
+                                                 }
+                                             };
+    
     private final List<Borrower> suggestions = new ArrayList<Borrower>();
-    private final Context context;
-    private final int layoutResourceId;
-
+    
     public BorrowerAdapter(Context context, int textViewResourceId,
             List<Borrower> objects) {
         super(context, textViewResourceId, objects);
-        borrowers = objects;
+        this.borrowers = objects;
         this.context = context;
         this.layoutResourceId = textViewResourceId;
     }
-
+    
+    public List<Borrower> getBorrowers() {
+        return this.borrowers;
+    }
+    
+    @Override
+    public Filter getFilter() {
+        return this.nameFilter;
+    }
+    
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         BorrowerHolder holder = new BorrowerHolder();
-
+        
         if (row == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
+            LayoutInflater inflater = ((Activity) this.context)
+                    .getLayoutInflater();
+            row = inflater.inflate(this.layoutResourceId, parent, false);
         }
-
+        
         holder.name = (TextView) row
                 .findViewById(R.id.borrower_row_borrower_name);
-
-        Borrower borrower = borrowers.get(position);
-
+        
+        Borrower borrower = this.borrowers.get(position);
+        
         holder.name.setText(borrower.getName());
         return row;
     }
-
-    public List<Borrower> getBorrowers() {
-        return borrowers;
-    }
-
-    class BorrowerHolder {
-        TextView name;
-    }
-
-    @Override
-    public Filter getFilter() {
-        return nameFilter;
-    }
-
-    Filter nameFilter = new Filter() {
-        @Override
-        public String convertResultToString(Object resultValue) {
-            String str = ((Borrower) (resultValue)).getName();
-            return str;
-        }
-
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            if (constraint != null) {
-                suggestions.clear();
-                for (Borrower b : borrowers) {
-                    if (b.getName().toLowerCase()
-                            .startsWith(constraint.toString().toLowerCase())) {
-                        suggestions.add(b);
-                    }
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = suggestions;
-                filterResults.count = suggestions.size();
-                return filterResults;
-            } else {
-                return new FilterResults();
-            }
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint,
-                FilterResults results) {
-            ArrayList<Borrower> filteredList = (ArrayList<Borrower>) results.values;
-            if (results != null && results.count > 0) {
-                clear();
-                for (Borrower c : filteredList) {
-                    add(c);
-                }
-                notifyDataSetChanged();
-            }
-        }
-    };
-
+    
 }
