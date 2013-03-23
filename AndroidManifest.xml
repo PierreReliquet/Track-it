@@ -31,10 +31,12 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name="org.pierrrrrrrot.loanmanager.Menu"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +46,9 @@
         <activity
             android:name="org.pierrrrrrrot.loanmanager.activities.AddLoan"
             android:label="@string/menu_add_loan"
-            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu" >
+            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu"
+            android:screenOrientation="portrait" 
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.pierrrrrrrot.loanmanager.activities.Menu" />
@@ -52,7 +56,9 @@
         <activity
             android:name="org.pierrrrrrrot.loanmanager.activities.ListBorrowers"
             android:label="@string/title_activity_list_borrowers"
-            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu" >
+            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu" 
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.pierrrrrrrot.loanmanager.activities.Menu" />
@@ -60,7 +66,9 @@
         <activity
             android:name="org.pierrrrrrrot.loanmanager.activities.ListLoans"
             android:label="@string/title_activity_list_loans"
-            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu" >
+            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu" 
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.pierrrrrrrot.loanmanager.activities.Menu" />
@@ -68,7 +76,9 @@
         <activity
             android:name="org.pierrrrrrrot.loanmanager.activities.ListProducts"
             android:label="@string/title_activity_list_products"
-            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu" >
+            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu" 
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.pierrrrrrrot.loanmanager.Menu" />
@@ -76,7 +86,9 @@
         <activity
             android:name="org.pierrrrrrrot.loanmanager.activities.CloseLoan"
             android:label="@string/title_activity_close_loan"
-            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu" >
+            android:parentActivityName="org.pierrrrrrrot.loanmanager.Menu"
+            android:screenOrientation="portrait"
+             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.pierrrrrrrot.loanmanager.Menu" />

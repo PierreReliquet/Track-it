@@ -19,7 +19,7 @@
 <resources>
 
     <!-- App -->
-    <string name="app_name">Loan Manager</string>
+    <string name="app_name">Loans Manager</string>
     <string name="action_settings">Settings</string>
 
     <!-- Menu -->
@@ -27,7 +27,7 @@
     <string name="menu_list_loans">List loans</string>
     <string name="menu_list_borrowers">List borrowers</string>
     <string name="menu_close_loan">Close a loan</string>
-    <string name="menu_logo">Loan Manager: Don\'t lose your stuff anymore!</string>
+    <string name="menu_logo">Loans Manager: Don\'t lose your stuff anymore!</string>
     <string name="menu_list_products">List products</string>
 
     <!-- Title -->

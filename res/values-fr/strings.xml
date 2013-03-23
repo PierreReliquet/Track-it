@@ -28,7 +28,7 @@
     <string name="menu_list_borrowers">Lister les emprunteurs</string>
     <string name="menu_close_loan">Fermer un prêt</string>
     <string name="loan_end_date">"Date de fin: "</string>
-    <string name="menu_logo">Gestionnaire de prêts</string>
+    <string name="menu_logo">Gestionnaire de prêts: Ne perdez plus vos affaires!</string>
     <string name="menu_list_products">Lister les produits</string>
     
     <!-- Title -->

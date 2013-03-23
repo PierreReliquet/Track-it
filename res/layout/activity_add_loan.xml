@@ -1,4 +1,4 @@
-<!-- 
+<!--
  Copyright 2013 Pierre Reliquet©
  
  Loans Manager is free software: you can redistribute it and/or modify it
@@ -26,7 +26,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.15"
+        android:layout_weight="0.12"
         android:orientation="horizontal" >
 
         <EditText
@@ -37,7 +37,6 @@
             android:ems="10"
             android:hint="@string/product_barcode_hint"
             android:inputType="number" >
-
             <requestFocus />
         </EditText>
 
@@ -49,79 +48,57 @@
             android:src="@drawable/camera" />
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/add_loan_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:gravity="center_vertical"
+        android:text="@string/product_name"
+       />
+
+    <EditText
+        android:id="@+id/add_loan_input_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.15"
-        android:orientation="horizontal" >
+        android:ems="10"
+        android:hint="@string/product_name_hint" />
 
-        <TextView
-            android:id="@+id/add_loan_borrower_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:gravity="center_vertical"
-            android:text="@string/product_name"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/add_loan_borrower_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:gravity="center_vertical"
+        android:text="@string/borrower_name"
+        />
 
-        <EditText
-            android:id="@+id/add_loan_input_title"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.75"
-            android:ems="10"
-            android:hint="@string/product_name_hint"
-            android:inputType="textMultiLine" />
-    </LinearLayout>
-
-    <LinearLayout
+    <AutoCompleteTextView
+        android:id="@+id/add_loan_borrower_name_input"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.15"
-        android:orientation="horizontal" >
+        android:ems="10"
+        android:hint="@string/borrower_name_hint" />
 
-        <TextView
-            android:id="@+id/add_loan_borrower_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:gravity="center_vertical"
-            android:text="@string/borrower_name"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/add_loan_product_additional_info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:gravity="center_vertical"
+        android:text="@string/product_additional_info_input_title"
+       	/>
 
-        <AutoCompleteTextView
-            android:id="@+id/add_loan_borrower_name_input"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.75"
-            android:ems="10"
-            android:hint="@string/borrower_name_hint" />
-    </LinearLayout>
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/add_loan_product_additional_info_input"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.15"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/add_loan_product_additional_info"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:gravity="center_vertical"
-            android:text="@string/product_additional_info_input_title"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <EditText
-            android:id="@+id/add_loan_product_additional_info_input"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.75"
-            android:ems="10"
-            android:hint="@string/product_additional_info_hint"
-            android:inputType="textMultiLine" />
-    </LinearLayout>
+        android:ems="10"
+        android:hint="@string/product_additional_info_hint"
+        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/add_loan_button"
