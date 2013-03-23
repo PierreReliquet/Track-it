@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+  	android:paddingBottom="5dp"
     android:orientation="vertical" >
 
     <TextView
@@ -30,6 +32,14 @@
      
      <TextView
         android:id="@+id/borrower_list_row_number_loans"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:textIsSelectable="true"
+        android:gravity="left" />
+     
+      <TextView
+        android:id="@+id/borrower_list_row_active_number_loans"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"

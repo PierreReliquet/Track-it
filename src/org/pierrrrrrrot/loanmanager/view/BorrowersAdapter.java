@@ -6,6 +6,7 @@ package org.pierrrrrrrot.loanmanager.view;
 import java.util.List;
 
 import org.pierrrrrrrot.loanmanager.R;
+import org.pierrrrrrrot.loanmanager.dao.LoansDAO;
 import org.pierrrrrrrot.loanmanager.model.Borrower;
 
 import android.app.Activity;
@@ -48,22 +49,32 @@ public class BorrowersAdapter extends ArrayAdapter<Borrower> {
         holder.name = (TextView) row.findViewById(R.id.borrower_list_row_name);
         holder.average = (TextView) row
                 .findViewById(R.id.borrower_list_row_average_time);
-        holder.average = (TextView) row
+        holder.numberOfLoans = (TextView) row
                 .findViewById(R.id.borrower_list_row_number_loans);
+        holder.activeLoans = (TextView) row
+                .findViewById(R.id.borrower_list_row_active_number_loans);
 
         Borrower borrower = borrowers.get(position);
 
-        holder.id.setText("" + borrower.getId());
-        holder.name.setText(borrower.getName());
-        // TODO 03-20 21:20:41.273: E/AndroidRuntime(2694):
-        // android.content.res.Resources$NotFoundException: String resource ID
-        // #0x0
-        holder.average.setText("" + borrower.getAverageTime());
-        holder.numberOfLoans.setText("" + borrower.getLoansAmount());
+        holder.id.setText(String.format(
+                context.getString(R.string.borrower_id), borrower.getId()));
+        holder.name.setText(String.format(
+                context.getString(R.string.borrower_name_adapter),
+                borrower.getName()));
+        holder.average.setText(String.format(
+                context.getString(R.string.borrower_average_time),
+                borrower.getAverageTime()));
+        holder.numberOfLoans.setText(String.format(
+                context.getString(R.string.borrower_number_of_loans),
+                borrower.getNumberOfLoans()));
+        holder.activeLoans.setText(String.format(
+                context.getString(R.string.borrower_number_of_active_loans),
+                LoansDAO.getInstance().getNumberOfNonTerminatedLoanByBorrower(
+                        borrower)));
         return row;
     }
 
-    public List<Borrower> getLoans() {
+    public List<Borrower> getBorrowers() {
         return borrowers;
     }
 
@@ -72,6 +83,7 @@ public class BorrowersAdapter extends ArrayAdapter<Borrower> {
         TextView name;
         TextView average;
         TextView numberOfLoans;
+        TextView activeLoans;
     }
 
 }

@@ -7,7 +7,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/loan_row_borrower_name"
+        android:id="@+id/product_list_row_barcode"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
@@ -15,7 +15,7 @@
         android:gravity="left" />
 
     <TextView
-        android:id="@+id/loan_row_product_name"
+        android:id="@+id/product_list_row_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
@@ -23,15 +23,7 @@
         android:gravity="left" />
      
      <TextView
-        android:id="@+id/loan_row_start_date"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:textIsSelectable="true"
-        android:gravity="left" />
-     
-      <TextView
-        android:id="@+id/loan_row_end_date"
+        android:id="@+id/product_list_row_info"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"

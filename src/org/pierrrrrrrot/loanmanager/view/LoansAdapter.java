@@ -23,7 +23,7 @@ import android.widget.TextView;
  */
 public class LoansAdapter extends ArrayAdapter<Loan> {
 
-    private final List<Loan> loans;
+    private List<Loan> loans;
     private final Context context;
     private final int layoutResourceId;
 
@@ -51,6 +51,7 @@ public class LoansAdapter extends ArrayAdapter<Loan> {
                 .findViewById(R.id.loan_row_product_name);
         holder.startDate = (TextView) row
                 .findViewById(R.id.loan_row_start_date);
+        holder.endDate = (TextView) row.findViewById(R.id.loan_row_end_date);
 
         Loan loan = loans.get(position);
 
@@ -62,6 +63,15 @@ public class LoansAdapter extends ArrayAdapter<Loan> {
                 .setText(context.getString(R.string.loan_start_date)
                         + DateFormat.getDateFormat(getContext()).format(
                                 loan.getDate()));
+        if (loan.getEndDate().getTime() != 0) {
+            holder.endDate.setText(context.getString(R.string.loan_end_date)
+                    + DateFormat.getDateFormat(getContext()).format(
+                            loan.getEndDate()));
+        } else {
+            holder.endDate.setText(context.getString(R.string.loan_end_date)
+                    + context.getString(R.string.still_active));
+        }
+
         return row;
     }
 
@@ -69,10 +79,15 @@ public class LoansAdapter extends ArrayAdapter<Loan> {
         return loans;
     }
 
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+
     class LoanHolder {
         TextView borrower;
         TextView product;
         TextView startDate;
+        TextView endDate;
     }
 
 }
