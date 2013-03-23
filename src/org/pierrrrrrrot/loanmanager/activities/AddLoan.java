@@ -28,6 +28,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -136,6 +137,17 @@ public class AddLoan extends Activity {
         productTitle = (EditText) findViewById(R.id.add_loan_input_title);
         scanBarcode.setOnClickListener(scanCodeListener);
         productInfo = (EditText) findViewById(R.id.add_loan_product_additional_info_input);
+
+        // Add an event to detect when the focus is lost
+        // This event is useful if the barcode is typed manually!
+        productBarcode.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!productBarcode.hasFocus()) {
+                    parseScanCodeResults(productBarcode.getText().toString());
+                }
+            }
+        });
     }
 
     /**
@@ -159,9 +171,9 @@ public class AddLoan extends Activity {
         try {
             Product tmp = produtsDAO.getProductByBarcode(contents);
             if (tmp == null) {
-                tmp = new Product();
                 Toast.makeText(this, getString(R.string.internet_looking),
                         Toast.LENGTH_LONG).show();
+                tmp = new Product();
                 productTitle.setText(InformationFinder
                         .findTitleFromBarcode(contents));
             } else {
