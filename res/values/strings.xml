@@ -55,6 +55,10 @@
     <string name="store_confirmation">You are going to be redirected towards the market to download a barcode scanner. Do you agree ?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="close">Close</string>
+    <string name="contact">Email the author</string>
     <string name="ic_launcher_description">The boomerang: logo of the app</string>
+    <string name="menu_about_title">About!</string>
+    <string name="menu_about_message">"Version: %s\nAuthor:\nThis application is developped by Pierre Reliquet (Nantes, France). If you have any ideas to enhance that application (translations, ideas, problems encountered), do not hesitate to contact me by clicking on the button below."</string>
 
 </resources>

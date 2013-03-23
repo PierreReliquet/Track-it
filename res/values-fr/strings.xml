@@ -55,6 +55,10 @@
     <string name="store_confirmation">Vous allez être redirigé vers le market pour télécharger un lecteur de code-barre. Êtes-vous d\'accord ?</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="close">Fermer</string>
+    <string name="contact">Contacter l\'auteur</string>
     <string name="ic_launcher_description">Le boomerang: logo de l\'application</string>
+    <string name="menu_about_title">À propos!</string>
+    <string name="menu_about_message">"Version: %s\nAuteur:\nCette application est développée par Pierre Reliquet (Nantes, France). Si vous avez des suggestions d'améliorations (traductions, idées, problèmes rencontrés), n'hésitez pas à me contacter en cliquant sur le lien ci-dessous!"</string>
 
 </resources>
