@@ -17,16 +17,38 @@ public class ProductsDAO extends DBHelper {
     private static final String PRODUCTS_COLUMN_NAME = "NAME";
     private static final String PRODUCTS_COLUMN_INFO = "INFO";
 
-    private static final String PRODUCTS_TABLE_CREATE = "CREATE TABLE "
-            + PRODUCTS_TABLE + " (" + PRODUCTS_COLUMN_ID
-            + " INTEGER PRIMARY KEY," + PRODUCTS_COLUMN_NAME
+    private static final String PRODUCTS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS  "
+            + PRODUCTS_TABLE
+            + " ("
+            + PRODUCTS_COLUMN_ID
+            + " INTEGER PRIMARY KEY,"
+            + PRODUCTS_COLUMN_NAME
             + " TEXT NOT NULL," + PRODUCTS_COLUMN_INFO + " TEXT" + ");";
 
     private static final String PRODUCTS_TABLE_DROP = " DROP TABLE "
             + PRODUCTS_TABLE + ";";
 
-    public ProductsDAO(Context context) {
+    private static volatile ProductsDAO instance = null;
+
+    protected ProductsDAO(Context context) {
         super(context);
+    }
+
+    public static void init(Context context) {
+        if (ProductsDAO.instance == null) {
+            synchronized (ProductsDAO.class) {
+                if (ProductsDAO.instance == null) {
+                    ProductsDAO.instance = new ProductsDAO(context);
+                }
+            }
+        }
+    }
+
+    public static ProductsDAO getInstance() {
+        if (ProductsDAO.instance == null) {
+            throw new RuntimeException("The init method should be called first");
+        }
+        return ProductsDAO.instance;
     }
 
     @Override

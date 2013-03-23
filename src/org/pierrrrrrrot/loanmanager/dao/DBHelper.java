@@ -20,10 +20,24 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final Object NO_MATCHING = null;
 
-    public DBHelper(Context context) {
+    protected DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        onCreate(getWritableDatabase());
+        getWritableDatabase().close();
         // for development purposes only
         // onUpgrade(getWritableDatabase(), 0, 1);
+    }
+
+    /**
+     * This method is made to ensure that the initialization of the DB is going
+     * to be properly made
+     * 
+     * @param context
+     */
+    public static void globalInit(Context context) {
+        ProductsDAO.init(context);
+        BorrowersDAO.init(context);
+        LoansDAO.init(context);
     }
 
     protected void insertObject(String table, ContentValues values) {
