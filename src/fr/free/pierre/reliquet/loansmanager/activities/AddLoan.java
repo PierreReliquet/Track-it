@@ -14,21 +14,10 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager.activities;
+package fr.free.pierre.reliquet.loansmanager.activities;
 
 import java.util.Date;
 import java.util.List;
-
-import org.pierrrrrrrot.loanmanager.R;
-import org.pierrrrrrrot.loanmanager.dao.BorrowersDAO;
-import org.pierrrrrrrot.loanmanager.dao.LoansDAO;
-import org.pierrrrrrrot.loanmanager.dao.ProductsDAO;
-import org.pierrrrrrrot.loanmanager.model.Borrower;
-import org.pierrrrrrrot.loanmanager.model.Loan;
-import org.pierrrrrrrot.loanmanager.model.Product;
-import org.pierrrrrrrot.loanmanager.utils.InformationFinder;
-import org.pierrrrrrrot.loanmanager.utils.Utils;
-import org.pierrrrrrrot.loanmanager.view.BorrowerAdapter;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -46,6 +35,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import fr.free.pierre.reliquet.loansmanager.R;
+import fr.free.pierre.reliquet.loansmanager.dao.BorrowersDAO;
+import fr.free.pierre.reliquet.loansmanager.dao.LoansDAO;
+import fr.free.pierre.reliquet.loansmanager.dao.ProductsDAO;
+import fr.free.pierre.reliquet.loansmanager.model.Borrower;
+import fr.free.pierre.reliquet.loansmanager.model.Loan;
+import fr.free.pierre.reliquet.loansmanager.model.Product;
+import fr.free.pierre.reliquet.loansmanager.utils.InformationFinder;
+import fr.free.pierre.reliquet.loansmanager.utils.Utils;
+import fr.free.pierre.reliquet.loansmanager.view.BorrowerAdapter;
 
 /**
  * @author Pierre Reliquet
@@ -134,7 +133,11 @@ public class AddLoan extends Activity {
                 .setOnFocusChangeListener(new OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
-                        if (!AddLoan.this.productBarcode.hasFocus()) {
+                        if (!AddLoan.this.productBarcode.hasFocus()
+                                && !Utils.isNullOrEmpty(productBarcode
+                                        .getText().toString())
+                                && !Utils.isNullOrEmpty(productTitle.getText()
+                                        .toString())) {
                             AddLoan.this
                                     .parseScanCodeResults(AddLoan.this.productBarcode
                                             .getText().toString());
@@ -151,7 +154,9 @@ public class AddLoan extends Activity {
         if (resultCode != RESULT_CANCELED) {
             if ((requestCode == INTENT_CODE_BARCODE)
                     && (resultCode == RESULT_OK) && (data != null)) {
-                this.parseScanCodeResults(data.getStringExtra("SCAN_RESULT"));
+                productBarcode.setText(data.getStringExtra("SCAN_RESULT"));
+                borrower.requestFocus();
+                parseScanCodeResults(productBarcode.getText().toString());
             }
         }
     }

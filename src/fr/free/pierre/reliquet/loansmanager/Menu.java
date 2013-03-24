@@ -14,14 +14,7 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager;
-
-import org.pierrrrrrrot.loanmanager.activities.AddLoan;
-import org.pierrrrrrrot.loanmanager.activities.CloseLoan;
-import org.pierrrrrrrot.loanmanager.activities.ListBorrowers;
-import org.pierrrrrrrot.loanmanager.activities.ListLoans;
-import org.pierrrrrrrot.loanmanager.activities.ListProducts;
-import org.pierrrrrrrot.loanmanager.dao.DBHelper;
+package fr.free.pierre.reliquet.loansmanager;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,6 +29,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import fr.free.pierre.reliquet.loansmanager.activities.AddLoan;
+import fr.free.pierre.reliquet.loansmanager.activities.CloseLoan;
+import fr.free.pierre.reliquet.loansmanager.activities.ListBorrowers;
+import fr.free.pierre.reliquet.loansmanager.activities.ListLoans;
+import fr.free.pierre.reliquet.loansmanager.activities.ListProducts;
+import fr.free.pierre.reliquet.loansmanager.dao.DBHelper;
 
 public class Menu extends Activity {
     

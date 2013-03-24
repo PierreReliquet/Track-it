@@ -14,14 +14,9 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager.activities;
+package fr.free.pierre.reliquet.loansmanager.activities;
 
 import java.util.List;
-
-import org.pierrrrrrrot.loanmanager.R;
-import org.pierrrrrrrot.loanmanager.dao.BorrowersDAO;
-import org.pierrrrrrrot.loanmanager.model.Borrower;
-import org.pierrrrrrrot.loanmanager.view.BorrowersAdapter;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -32,6 +27,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import fr.free.pierre.reliquet.loansmanager.R;
+import fr.free.pierre.reliquet.loansmanager.dao.BorrowersDAO;
+import fr.free.pierre.reliquet.loansmanager.model.Borrower;
+import fr.free.pierre.reliquet.loansmanager.view.BorrowersAdapter;
 
 public class ListBorrowers extends Activity {
     

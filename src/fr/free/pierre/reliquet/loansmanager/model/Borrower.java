@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager.model;
+package fr.free.pierre.reliquet.loansmanager.model;
 
 import org.apache.commons.lang.WordUtils;
 

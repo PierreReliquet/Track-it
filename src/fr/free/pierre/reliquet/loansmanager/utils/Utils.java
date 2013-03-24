@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager.utils;
+package fr.free.pierre.reliquet.loansmanager.utils;
 
 public class Utils {
     

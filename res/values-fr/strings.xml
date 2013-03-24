@@ -20,7 +20,6 @@
 
     <!-- App  -->
     <string name="app_name">Gestionnaire de prêt</string>
-    <string name="action_settings">Paramètres</string>
     
     <!-- Menu -->
     <string name="menu_add_loan">Ajouter un nouveau prêt</string>

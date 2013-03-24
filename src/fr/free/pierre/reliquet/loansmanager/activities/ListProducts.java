@@ -14,39 +14,39 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager.activities;
+package fr.free.pierre.reliquet.loansmanager.activities;
 
 import java.util.List;
-
-import org.pierrrrrrrot.loanmanager.R;
-import org.pierrrrrrrot.loanmanager.dao.LoansDAO;
-import org.pierrrrrrrot.loanmanager.model.Loan;
-import org.pierrrrrrrot.loanmanager.view.LoansAdapter;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ListView;
+import fr.free.pierre.reliquet.loansmanager.R;
+import fr.free.pierre.reliquet.loansmanager.dao.ProductsDAO;
+import fr.free.pierre.reliquet.loansmanager.model.Product;
+import fr.free.pierre.reliquet.loansmanager.view.ProductAdapter;
 
-public class ListLoans extends Activity {
+public class ListProducts extends Activity {
     
-    private ListView loans;
-    private LoansDAO loansDAO;
+    private ProductsDAO productsDAO;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_list_loans);
+        this.setContentView(R.layout.activity_list_products);
         // Show the Up button in the action bar.
         this.setupActionBar();
-        this.loansDAO = LoansDAO.getInstance();
-        this.loans = (ListView) this.findViewById(R.id.list_loans_list);
-        List<Loan> loansList = this.loansDAO.getAllLoans();
-        LoansAdapter loansAdapter = new LoansAdapter(this,
-                R.layout.loan_row_layout, loansList);
-        this.loans.setAdapter(loansAdapter);
         
+        this.productsDAO = ProductsDAO.getInstance();
+        
+        ListView products = (ListView) this
+                .findViewById(R.id.list_products_list);
+        List<Product> productsList = this.productsDAO.getAllProducts();
+        ProductAdapter adapter = new ProductAdapter(this,
+                R.layout.product_list_row_layout, productsList);
+        products.setAdapter(adapter);
     }
     
     /**
@@ -58,5 +58,4 @@ public class ListLoans extends Activity {
             this.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-    
 }

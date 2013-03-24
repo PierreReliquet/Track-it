@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager.dao;
+package fr.free.pierre.reliquet.loansmanager.dao;
 
 import android.content.ContentValues;
 import android.content.Context;

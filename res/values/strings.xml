@@ -20,7 +20,6 @@
 
     <!-- App -->
     <string name="app_name">Loans Manager</string>
-    <string name="action_settings">Settings</string>
 
     <!-- Menu -->
     <string name="menu_add_loan">Add a new loan</string>

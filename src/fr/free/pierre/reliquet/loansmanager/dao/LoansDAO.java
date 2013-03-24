@@ -14,20 +14,19 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager.dao;
+package fr.free.pierre.reliquet.loansmanager.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.pierrrrrrrot.loanmanager.model.Borrower;
-import org.pierrrrrrrot.loanmanager.model.Loan;
-import org.pierrrrrrrot.loanmanager.utils.Utils;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import fr.free.pierre.reliquet.loansmanager.model.Borrower;
+import fr.free.pierre.reliquet.loansmanager.model.Loan;
+import fr.free.pierre.reliquet.loansmanager.utils.Utils;
 
 /**
  * @author Pierre Reliquet

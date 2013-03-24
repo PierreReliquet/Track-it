@@ -14,12 +14,9 @@
  * You should have received a copy of the GNU General Public License along with
  * Loans Manager. If not, see <http://www.gnu.org/licenses/>
  */
-package org.pierrrrrrrot.loanmanager.view;
+package fr.free.pierre.reliquet.loansmanager.view;
 
 import java.util.List;
-
-import org.pierrrrrrrot.loanmanager.R;
-import org.pierrrrrrrot.loanmanager.model.Loan;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import fr.free.pierre.reliquet.loansmanager.R;
+import fr.free.pierre.reliquet.loansmanager.model.Loan;
 
 /**
  * @author Pierre Reliquet
@@ -36,7 +35,7 @@ import android.widget.TextView;
  */
 public class LoansAdapter extends ArrayAdapter<Loan> {
     
-    class LoanHolder {
+    private class LoanHolder {
         TextView borrower;
         TextView endDate;
         TextView product;
