@@ -26,6 +26,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringEscapeUtils;
 
 import android.util.Log;
+import fr.free.pierre.reliquet.loansmanager.BuildConfig;
 
 /**
  * @author Pierre Reliquet
@@ -81,8 +82,11 @@ public class InformationFinder {
                     + START_SUB_PATTERN.length());
             parsing = parsing.substring(0, parsing.indexOf(END_SUB_PATTERN));
         } catch (Exception e) {
-            Log.e("PARSING",
-                    "An error occured while searching the information over the internet");
+            if (BuildConfig.DEBUG) {
+                Log.e("PARSING",
+                        "An error occured while searching the information over the internet");
+                e.printStackTrace();
+            }
             parsing = "";
         } finally {
             in.close();
