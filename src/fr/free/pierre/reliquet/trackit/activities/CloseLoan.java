@@ -1,20 +1,20 @@
 /**
  * Copyright 2013 Pierre Reliquet©
  * 
- * Loans Manager is free software: you can redistribute it and/or modify it
+ * Track-it is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
  * 
- * Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ * Track-it is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  * 
  * You should have received a copy of the GNU General Public License along with
- * Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ * Track-it. If not, see <http://www.gnu.org/licenses/>
  */
-package fr.free.pierre.reliquet.loansmanager.activities;
+package fr.free.pierre.reliquet.trackit.activities;
 
 import java.util.List;
 
@@ -29,10 +29,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import fr.free.pierre.reliquet.loansmanager.R;
-import fr.free.pierre.reliquet.loansmanager.dao.LoansDAO;
-import fr.free.pierre.reliquet.loansmanager.model.Loan;
-import fr.free.pierre.reliquet.loansmanager.view.LoansAdapter;
+import fr.free.pierre.reliquet.trackit.R;
+import fr.free.pierre.reliquet.trackit.dao.LoansDAO;
+import fr.free.pierre.reliquet.trackit.model.Loan;
+import fr.free.pierre.reliquet.trackit.view.LoansAdapter;
 
 public class CloseLoan extends Activity {
     

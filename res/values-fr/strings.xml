@@ -2,24 +2,24 @@
 <!-- 
  Copyright 2013 Pierre Reliquet©
  
- Loans Manager is free software: you can redistribute it and/or modify it
+ Track-it is free software: you can redistribute it and/or modify it
  under the terms of the GNU General Public License as published by the Free
  Software Foundation, either version 3 of the License, or (at your option) any
  later version.
 
- Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ Track-it is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  details.
  
  You should have received a copy of the GNU General Public License along with
- Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ Track-it. If not, see <http://www.gnu.org/licenses/>
 -->
 
 <resources>
 
     <!-- App  -->
-    <string name="app_name">Gestionnaire de prêt</string>
+    <string name="app_name">Track-it!</string>
     
     <!-- Menu -->
     <string name="menu_add_loan">Ajouter un nouveau prêt</string>
@@ -27,7 +27,7 @@
     <string name="menu_list_borrowers">Lister les emprunteurs</string>
     <string name="menu_close_loan">Fermer un prêt</string>
     <string name="loan_end_date">"Date de fin: "</string>
-    <string name="menu_logo">Gestionnaire de prêts: Ne perdez plus vos affaires!</string>
+    <string name="menu_logo">Track-it: Ne perdez plus vos affaires, tracez-les!</string>
     <string name="menu_list_products">Lister les produits</string>
     
     <!-- Title -->
@@ -75,16 +75,17 @@
     <string name="contact">Contacter l\'auteur</string>
     <string name="ic_launcher_description">Le boomerang: logo de l\'application</string>
     <string name="menu_about_title">À propos!</string>
-    <string name="menu_about_message">"Version: %s\n
+    <string name="menu_about_message">"Track-it: Ne perdez plus vos affaires, tracez-les!
+Version: %s\n
 Auteur:
 Cette application est développée par Pierre Reliquet (Nantes, France). Si vous avez des suggestions d'améliorations (traductions, idées, problèmes rencontrés), n'hésitez pas à me contacter en cliquant sur le lien ci-dessous!
 Licences :
-Loans Manager est distribué gratuitement et sous licence GNU GPL3 dont les termes sont citées ci-après:
+Track-it est distribué gratuitement et sous licence GNU GPL3 dont les termes sont citées ci-après:
 
-Loans Manager is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
-Loans Manager is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+Track-it is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
+Track-it is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with Loans Manager.  If not, see &lt;http://www.gnu.org/licenses/&gt;
+You should have received a copy of the GNU General Public License along with Track-it.  If not, see &lt;http://www.gnu.org/licenses/&gt;
 
 Apache License: Ce programme est aussi basé sur la librairie Apache commons lang library respectant: 
 Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.  See the NOTICE file distributed with this work for additional information regarding copyright ownership.  The ASF licenses this file to you under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License.  You may obtain a copy of the License at

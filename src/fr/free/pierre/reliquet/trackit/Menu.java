@@ -1,20 +1,20 @@
 /**
  * Copyright 2013 Pierre Reliquet©
  * 
- * Loans Manager is free software: you can redistribute it and/or modify it
+ * Track-it is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
  * 
- * Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ * Track-it is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  * 
  * You should have received a copy of the GNU General Public License along with
- * Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ * Track-it. If not, see <http://www.gnu.org/licenses/>
  */
-package fr.free.pierre.reliquet.loansmanager;
+package fr.free.pierre.reliquet.trackit;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,17 +29,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import fr.free.pierre.reliquet.loansmanager.activities.AddLoan;
-import fr.free.pierre.reliquet.loansmanager.activities.CloseLoan;
-import fr.free.pierre.reliquet.loansmanager.activities.ListBorrowers;
-import fr.free.pierre.reliquet.loansmanager.activities.ListLoans;
-import fr.free.pierre.reliquet.loansmanager.activities.ListProducts;
-import fr.free.pierre.reliquet.loansmanager.dao.DBHelper;
+import fr.free.pierre.reliquet.trackit.activities.AddLoan;
+import fr.free.pierre.reliquet.trackit.activities.CloseLoan;
+import fr.free.pierre.reliquet.trackit.activities.ListBorrowers;
+import fr.free.pierre.reliquet.trackit.activities.ListLoans;
+import fr.free.pierre.reliquet.trackit.activities.ListProducts;
+import fr.free.pierre.reliquet.trackit.dao.DBHelper;
 
 public class Menu extends Activity {
     
     private static final String[] AUTHOR_EMAIL             = { "pierre.reliquet@gmail.com" };
-    private static final String   LOANS_MANAGER_MAIL_TITLE = "Loans Manager ";
+    private static final String   LOANS_MANAGER_MAIL_TITLE = "Track-it ";
     
     private void init() {
         // Create dbs if does not exists

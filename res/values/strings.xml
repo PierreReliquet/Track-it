@@ -2,31 +2,31 @@
 <!-- 
  Copyright 2013 Pierre Reliquet©
  
- Loans Manager is free software: you can redistribute it and/or modify it
+ Track-it is free software: you can redistribute it and/or modify it
  under the terms of the GNU General Public License as published by the Free
  Software Foundation, either version 3 of the License, or (at your option) any
  later version.
 
- Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ Track-it is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  details.
  
  You should have received a copy of the GNU General Public License along with
- Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ Track-it. If not, see <http://www.gnu.org/licenses/>
 -->
 
 <resources>
 
     <!-- App -->
-    <string name="app_name">Loans Manager</string>
+    <string name="app_name">Track-it!</string>
 
     <!-- Menu -->
     <string name="menu_add_loan">Add a new loan</string>
     <string name="menu_list_loans">List loans</string>
     <string name="menu_list_borrowers">List borrowers</string>
     <string name="menu_close_loan">Close a loan</string>
-    <string name="menu_logo">Loans Manager: Don\'t lose your stuff anymore!</string>
+    <string name="menu_logo">Track-it: Don\'t lose your stuff anymore, track-it!</string>
     <string name="menu_list_products">List products</string>
 
     <!-- Title -->
@@ -75,13 +75,14 @@
     <string name="contact">Email the author</string>
     <string name="ic_launcher_description">The boomerang: logo of the app</string>
     <string name="menu_about_title">About!</string>
-    <string name="menu_about_message">"Version: %s
+    <string name="menu_about_message">"Track-it: Don't lose your stuff anymore, track-it!
+Version: %s
 Author:
 This application is developped by Pierre Reliquet (Nantes, France). If you have any ideas to enhance that application (translations, ideas, problems encountered), do not hesitate to contact me by clicking on the button below.
 Licenses:
-Loans Manager is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-Loans Manager is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-You should have received a copy of the GNU General Public License along with Loans Manager.  If not, see &lt;http://www.gnu.org/licenses/&gt;
+Track-it is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+Track-it is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with Track-it.  If not, see &lt;http://www.gnu.org/licenses/&gt;
 
 Apache License: This program uses the Apache commons lang library which respects:
 Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License.  You may obtain a copy of the License at

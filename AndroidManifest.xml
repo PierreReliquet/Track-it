@@ -2,23 +2,23 @@
 <!-- 
  Copyright 2013 Pierre Reliquet©
  
- Loans Manager is free software: you can redistribute it and/or modify it
+ Track-it is free software: you can redistribute it and/or modify it
  under the terms of the GNU General Public License as published by the Free
  Software Foundation, either version 3 of the License, or (at your option) any
  later version.
 
- Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ Track-it is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  details.
  
  You should have received a copy of the GNU General Public License along with
- Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ Track-it. If not, see <http://www.gnu.org/licenses/>
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.free.pierre.reliquet.loansmanager"
+    package="fr.free.pierre.reliquet.trackit"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0.2" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -34,7 +34,7 @@
         android:theme="@style/AppTheme"
         >
         <activity
-            android:name="fr.free.pierre.reliquet.loansmanager.Menu"
+            android:name="fr.free.pierre.reliquet.trackit.Menu"
             android:label="@string/app_name" 
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -44,54 +44,54 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fr.free.pierre.reliquet.loansmanager.activities.AddLoan"
+            android:name="fr.free.pierre.reliquet.trackit.activities.AddLoan"
             android:label="@string/menu_add_loan"
-            android:parentActivityName="fr.free.pierre.reliquet.loansmanager.Menu"
+            android:parentActivityName="fr.free.pierre.reliquet.trackit.Menu"
             android:screenOrientation="portrait" 
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.free.pierre.reliquet.loansmanager.activities.Menu" />
+                android:value="fr.free.pierre.reliquet.trackit.activities.Menu" />
         </activity>
         <activity
-            android:name="fr.free.pierre.reliquet.loansmanager.activities.ListBorrowers"
+            android:name="fr.free.pierre.reliquet.trackit.activities.ListBorrowers"
             android:label="@string/title_activity_list_borrowers"
-            android:parentActivityName="fr.free.pierre.reliquet.loansmanager.Menu" 
+            android:parentActivityName="fr.free.pierre.reliquet.trackit.Menu" 
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.free.pierre.reliquet.loansmanager.activities.Menu" />
+                android:value="fr.free.pierre.reliquet.trackit.activities.Menu" />
         </activity>
         <activity
-            android:name="fr.free.pierre.reliquet.loansmanager.activities.ListLoans"
+            android:name="fr.free.pierre.reliquet.trackit.activities.ListLoans"
             android:label="@string/title_activity_list_loans"
-            android:parentActivityName="fr.free.pierre.reliquet.loansmanager.Menu" 
+            android:parentActivityName="fr.free.pierre.reliquet.trackit.Menu" 
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.free.pierre.reliquet.loansmanager.activities.Menu" />
+                android:value="fr.free.pierre.reliquet.trackit.activities.Menu" />
         </activity>
         <activity
-            android:name="fr.free.pierre.reliquet.loansmanager.activities.ListProducts"
+            android:name="fr.free.pierre.reliquet.trackit.activities.ListProducts"
             android:label="@string/title_activity_list_products"
-            android:parentActivityName="fr.free.pierre.reliquet.loansmanager.Menu" 
+            android:parentActivityName="fr.free.pierre.reliquet.trackit.Menu" 
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.free.pierre.reliquet.loansmanager.Menu" />
+                android:value="fr.free.pierre.reliquet.trackit.Menu" />
         </activity>
         <activity
-            android:name="fr.free.pierre.reliquet.loansmanager.activities.CloseLoan"
+            android:name="fr.free.pierre.reliquet.trackit.activities.CloseLoan"
             android:label="@string/title_activity_close_loan"
-            android:parentActivityName="fr.free.pierre.reliquet.loansmanager.Menu"
+            android:parentActivityName="fr.free.pierre.reliquet.trackit.Menu"
             android:screenOrientation="portrait"
              >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.free.pierre.reliquet.loansmanager.Menu" />
+                android:value="fr.free.pierre.reliquet.trackit.Menu" />
         </activity>
     </application>
 

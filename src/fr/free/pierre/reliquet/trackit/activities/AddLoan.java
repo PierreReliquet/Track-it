@@ -1,20 +1,20 @@
 /**
  * Copyright 2013 Pierre Reliquet©
  * 
- * Loans Manager is free software: you can redistribute it and/or modify it
+ * Track-it is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
  * 
- * Loans Manager is distributed in the hope that it will be useful, but WITHOUT
+ * Track-it is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  * 
  * You should have received a copy of the GNU General Public License along with
- * Loans Manager. If not, see <http://www.gnu.org/licenses/>
+ * Track-it. If not, see <http://www.gnu.org/licenses/>
  */
-package fr.free.pierre.reliquet.loansmanager.activities;
+package fr.free.pierre.reliquet.trackit.activities;
 
 import java.util.Date;
 import java.util.List;
@@ -35,16 +35,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import fr.free.pierre.reliquet.loansmanager.R;
-import fr.free.pierre.reliquet.loansmanager.dao.BorrowersDAO;
-import fr.free.pierre.reliquet.loansmanager.dao.LoansDAO;
-import fr.free.pierre.reliquet.loansmanager.dao.ProductsDAO;
-import fr.free.pierre.reliquet.loansmanager.model.Borrower;
-import fr.free.pierre.reliquet.loansmanager.model.Loan;
-import fr.free.pierre.reliquet.loansmanager.model.Product;
-import fr.free.pierre.reliquet.loansmanager.utils.InformationFinder;
-import fr.free.pierre.reliquet.loansmanager.utils.Utils;
-import fr.free.pierre.reliquet.loansmanager.view.BorrowerAdapter;
+import fr.free.pierre.reliquet.trackit.R;
+import fr.free.pierre.reliquet.trackit.dao.BorrowersDAO;
+import fr.free.pierre.reliquet.trackit.dao.LoansDAO;
+import fr.free.pierre.reliquet.trackit.dao.ProductsDAO;
+import fr.free.pierre.reliquet.trackit.model.Borrower;
+import fr.free.pierre.reliquet.trackit.model.Loan;
+import fr.free.pierre.reliquet.trackit.model.Product;
+import fr.free.pierre.reliquet.trackit.utils.InformationFinder;
+import fr.free.pierre.reliquet.trackit.utils.Utils;
+import fr.free.pierre.reliquet.trackit.view.BorrowerAdapter;
 
 /**
  * @author Pierre Reliquet
