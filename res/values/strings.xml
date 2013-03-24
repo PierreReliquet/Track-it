@@ -51,7 +51,7 @@
     <string name="product_display">"Product: "</string>
     <string name="product_barcode">Barcode: %d</string>
     <string name="product_title">Title: %s</string>
-    <string name="product_additional_info">Additional information: %d</string>
+    <string name="product_additional_info">Additional information: %s</string>
     <string name="product_additional_info_input_title">"Additional information: "</string>
     <string name="product_additional_info_hint">(Not required) Enter additional information about the product</string>
 
