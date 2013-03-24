@@ -84,6 +84,11 @@ public class InformationFinder extends AsyncTask<String, Void, String> {
 		}
 		return StringEscapeUtils.unescapeHtml(parsing);
 	}
+	
+	@Override
+	protected void onPreExecute() {
+		this.productTitle.setEnabled(false);
+	}
 
 	@Override
 	protected String doInBackground(String... params) {
@@ -106,5 +111,6 @@ public class InformationFinder extends AsyncTask<String, Void, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		productTitle.setText(result);
+		productTitle.setEnabled(true);
 	}
 }
