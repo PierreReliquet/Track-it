@@ -34,75 +34,72 @@ import fr.free.pierre.reliquet.trackit.dao.LoansDAO;
 import fr.free.pierre.reliquet.trackit.model.Loan;
 import fr.free.pierre.reliquet.trackit.view.LoansAdapter;
 
-public class CloseLoan extends Activity {
-    
-    public static final int    INTENT_CODE_CLOSE_LOAN             = 7778;
-    public static final String INTENT_CODE_CLOSE_LOAN_BORROWER_ID = "BORROWER";
-    
-    private LoansAdapter       adapter;
-    private String             borrowerId;
-    private ListView           loans;
-    private LoansDAO           loansDAO;
-    
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_list_loans);
-        // Show the Up button in the action bar.
-        this.setupActionBar();
-        this.borrowerId = this.getIntent().getStringExtra(
-                INTENT_CODE_CLOSE_LOAN_BORROWER_ID);
-        
-        this.loansDAO = LoansDAO.getInstance();
-        this.loans = (ListView) this.findViewById(R.id.list_loans_list);
-        this.refreshUI();
-        this.adapter = new LoansAdapter(this, R.layout.loan_row_layout,
-                this.loansDAO.getAllNonFinishedLoans(this.borrowerId));
-        this.loans.setAdapter(this.adapter);
-        this.loans.setOnItemClickListener(new OnItemClickListener() {
-            
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                    final int position, long id) {
-                new AlertDialog.Builder(CloseLoan.this)
-                        .setTitle(R.string.confirm_closing_title)
-                        .setMessage(R.string.confirm_closing_content)
-                        .setPositiveButton(R.string.no, new OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                    int which) {
-                                // Nothing to do stay on the page
-                            }
-                        })
-                        .setNegativeButton(R.string.yes, new OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                    int which) {
-                                Loan l = CloseLoan.this.adapter.getLoans().get(
-                                        position);
-                                CloseLoan.this.loansDAO.closeLoan(l);
-                                CloseLoan.this.refreshUI();
-                            }
-                        }).show();
-            }
-        });
-    }
-    
-    private void refreshUI() {
-        List<Loan> loansList = this.loansDAO
-                .getAllNonFinishedLoans(this.borrowerId);
-        this.adapter = new LoansAdapter(this, R.layout.loan_row_layout,
-                loansList);
-        this.loans.setAdapter(this.adapter);
-    }
-    
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            this.getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
+public class CloseLoan extends Activity implements OnItemClickListener {
+
+	public static final int INTENT_CODE_CLOSE_LOAN = 7778;
+	public static final String INTENT_CODE_CLOSE_LOAN_BORROWER_ID = "BORROWER";
+
+	private LoansAdapter adapter;
+	private String borrowerId;
+	private ListView loans;
+	private LoansDAO loansDAO;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.activity_list_loans);
+		// Show the Up button in the action bar.
+		this.setupActionBar();
+		this.borrowerId = this.getIntent().getStringExtra(
+				INTENT_CODE_CLOSE_LOAN_BORROWER_ID);
+
+		this.loansDAO = LoansDAO.getInstance();
+		this.loans = (ListView) this.findViewById(R.id.list_loans_list);
+		this.refreshUI();
+		this.adapter = new LoansAdapter(this, R.layout.loan_row_layout,
+				this.loansDAO.getAllNonFinishedLoans(this.borrowerId));
+		this.loans.setAdapter(this.adapter);
+		this.loans.setOnItemClickListener(this);
+	}
+
+	private void refreshUI() {
+		List<Loan> loansList = this.loansDAO
+				.getAllNonFinishedLoans(this.borrowerId);
+		this.adapter = new LoansAdapter(this, R.layout.loan_row_layout,
+				loansList);
+		this.loans.setAdapter(this.adapter);
+	}
+
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void setupActionBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			this.getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view,
+			final int position, long id) {
+		new AlertDialog.Builder(CloseLoan.this)
+				.setTitle(R.string.confirm_closing_title)
+				.setMessage(R.string.confirm_closing_content)
+				.setPositiveButton(R.string.no, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// Nothing to do stay on the page
+					}
+				}).setNegativeButton(R.string.yes, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Loan l = CloseLoan.this.adapter.getLoans()
+								.get(position);
+						CloseLoan.this.loansDAO.closeLoan(l);
+						CloseLoan.this.refreshUI();
+					}
+				}).show();
+
+	}
 }

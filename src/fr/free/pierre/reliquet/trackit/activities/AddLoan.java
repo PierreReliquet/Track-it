@@ -189,8 +189,7 @@ public class AddLoan extends Activity {
             Toast.makeText(this, this.getString(R.string.internet_looking),
                     Toast.LENGTH_LONG).show();
             tmp = new Product();
-            this.productTitle.setText(InformationFinder
-                    .findTitleFromBarcode(contents));
+            new InformationFinder(productTitle).execute(contents);
         } else {
             this.productTitle.setText(tmp.getTitle());
         }

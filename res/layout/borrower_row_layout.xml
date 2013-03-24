@@ -25,4 +25,4 @@
     android:padding="5dp"
     android:textSize="20dp"
     android:gravity="center"
-    android:textIsSelectable="true"/>
+    android:textIsSelectable="false"/>
