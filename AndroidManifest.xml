@@ -17,8 +17,8 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.free.pierre.reliquet.trackit"
-    android:versionCode="3"
-    android:versionName="1.0.4" >
+    android:versionCode="4"
+    android:versionName="1.0.5" >
 
     <uses-sdk
         android:minSdkVersion="8"
