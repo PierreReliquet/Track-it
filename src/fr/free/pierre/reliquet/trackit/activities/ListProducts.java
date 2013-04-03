@@ -1,15 +1,14 @@
 /**
  * Copyright 2013 Pierre Reliquet©
  * 
- * Track-it is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) any
- * later version.
+ * Track-it is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  * 
- * Track-it is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
+ * Track-it is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License along with
  * Track-it. If not, see <http://www.gnu.org/licenses/>
@@ -20,8 +19,12 @@ import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import fr.free.pierre.reliquet.trackit.R;
 import fr.free.pierre.reliquet.trackit.dao.ProductsDAO;
@@ -30,7 +33,9 @@ import fr.free.pierre.reliquet.trackit.view.ProductAdapter;
 
 public class ListProducts extends Activity {
     
-    private ProductsDAO productsDAO;
+    private ProductsDAO    productsDAO;
+    private ListView       products;
+    private ProductAdapter productAdapter;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +46,12 @@ public class ListProducts extends Activity {
         
         this.productsDAO = ProductsDAO.getInstance();
         
-        ListView products = (ListView) this
-                .findViewById(R.id.list_products_list);
+        this.products = (ListView) this.findViewById(R.id.list_products_list);
         List<Product> productsList = this.productsDAO.getAllProducts();
-        ProductAdapter adapter = new ProductAdapter(this,
+        this.productAdapter = new ProductAdapter(this,
                 R.layout.product_list_row_layout, productsList);
-        products.setAdapter(adapter);
+        this.products.setAdapter(this.productAdapter);
+        this.products.setOnItemClickListener(new ProductSelecter());
     }
     
     /**
@@ -56,6 +61,20 @@ public class ListProducts extends Activity {
     private void setupActionBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             this.getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+    
+    private class ProductSelecter implements OnItemClickListener {
+        
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                long id) {
+            Product selected = ListProducts.this.productAdapter.getProducts()
+                    .get(position);
+            Intent addLoan = new Intent(ListProducts.this, AddLoan.class);
+            addLoan.putExtra(AddLoan.BARCODE_EXTRA, selected.getBarcode() + "");
+            addLoan.putExtra(AddLoan.TITLE_EXTRA, selected.getTitle());
+            ListProducts.this.startActivity(addLoan);
         }
     }
 }

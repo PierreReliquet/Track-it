@@ -42,7 +42,6 @@ public class InformationFinder extends AsyncTask<String, Void, String> {
     private static final String              START_PATTERN         = "<div id=\"result_0\"";
     private static final String              START_SUB_PATTERN     = "<span class=\"lrg bold\"";
     private static final String              SUB_START_SUB_PATTERN = ">";
-    private static final String              TITLE_PATTERN         = "<span class=\"lrg bold\".*>(.*)</span>";
     private static final Map<String, String> LANGUAGES;
     static {
         LANGUAGES = new HashMap<String, String>();
@@ -105,7 +104,7 @@ public class InformationFinder extends AsyncTask<String, Void, String> {
         }
         String result = "";
         try {
-            result = internalFindTitleFromBarcode(params[0], extension);
+            result = this.internalFindTitleFromBarcode(params[0], extension);
         } catch (Exception e) {
             result = "";
         }
@@ -114,7 +113,7 @@ public class InformationFinder extends AsyncTask<String, Void, String> {
     
     @Override
     protected void onPostExecute(String result) {
-        productTitle.setText(result);
-        productTitle.setEnabled(true);
+        this.productTitle.setText(result);
+        this.productTitle.setEnabled(true);
     }
 }

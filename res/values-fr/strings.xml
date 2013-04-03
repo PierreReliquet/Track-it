@@ -67,6 +67,7 @@
     
     <!-- Miscellaneous -->
     <string name="internet_looking">Recherche du titre sur internet</string>
+    <string name="plus">+</string>
     <string name="go_store">Confirmer l\'accès au play store</string>
     <string name="store_confirmation">Vous allez être redirigé vers le market pour télécharger un lecteur de code-barre. Êtes-vous d\'accord ?</string>
     <string name="yes">Oui</string>

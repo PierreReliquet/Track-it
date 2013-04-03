@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
  Copyright 2013 Pierre Reliquet©
  
  Track-it is free software: you can redistribute it and/or modify it
@@ -16,68 +16,66 @@
  Track-it. If not, see <http://www.gnu.org/licenses/>
 -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="5dp"
-  	android:paddingBottom="5dp"
     android:orientation="horizontal"
-    >
-    
-    <LinearLayout 
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:paddingTop="5dp"
-  	android:paddingBottom="5dp"
-  	android:layout_weight="0.95"
-    android:orientation="vertical" >
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp" >
 
-    <TextView
-        android:id="@+id/borrower_list_row_id"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:textIsSelectable="false"
-        android:gravity="left" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.95"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
 
-    <TextView
-        android:id="@+id/borrower_list_row_name"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:textIsSelectable="false"
-        android:gravity="left" />
-     
-     <TextView
-        android:id="@+id/borrower_list_row_average_time"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:textIsSelectable="false"
-        android:gravity="left" />
-     
-     <TextView
-        android:id="@+id/borrower_list_row_number_loans"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:textIsSelectable="false"
-        android:gravity="left" />
-     
-      <TextView
-        android:id="@+id/borrower_list_row_active_number_loans"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:textIsSelectable="false"
-        android:gravity="left" />
+        <TextView
+            android:id="@+id/borrower_list_row_id"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="left"
+            android:textIsSelectable="false" />
 
-	</LinearLayout>
-	<ImageView
-	    android:src="@drawable/go" 
-	    android:layout_width="0dp"
-	    android:layout_height="match_parent"
-	    android:layout_weight="0.05"
-	    />
+        <TextView
+            android:id="@+id/borrower_list_row_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="left"
+            android:textIsSelectable="false" />
+
+        <TextView
+            android:id="@+id/borrower_list_row_average_time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="left"
+            android:textIsSelectable="false" />
+
+        <TextView
+            android:id="@+id/borrower_list_row_number_loans"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="left"
+            android:textIsSelectable="false" />
+
+        <TextView
+            android:id="@+id/borrower_list_row_active_number_loans"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="left"
+            android:textIsSelectable="false" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.05"
+        android:src="@drawable/go" />
+
 </LinearLayout>

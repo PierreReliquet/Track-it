@@ -1,15 +1,14 @@
 /**
  * Copyright 2013 Pierre Reliquet©
  * 
- * Track-it is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) any
- * later version.
+ * Track-it is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  * 
- * Track-it is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
+ * Track-it is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License along with
  * Track-it. If not, see <http://www.gnu.org/licenses/>
@@ -109,9 +108,29 @@ public class ProductsDAO extends DBHelper {
         return p;
     }
     
+    public Product getProductByName(String title) {
+        Product p = null;
+        Cursor c = this.getReadableDatabase().query(PRODUCTS_TABLE, null,
+                PRODUCTS_COLUMN_NAME + "=?", new String[] { title }, null,
+                null, PRODUCTS_COLUMN_ID);
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            p = this.createProductFromCursor(c);
+        } else {
+            c.close();
+            this.getReadableDatabase().close();
+            return (Product) NO_MATCHING;
+        }
+        c.close();
+        this.getReadableDatabase().close();
+        return p;
+    }
+    
     public void insertProduct(Product aProduct) {
         ContentValues values = new ContentValues();
-        values.put(PRODUCTS_COLUMN_ID, aProduct.getBarcode());
+        if (aProduct.getBarcode() != 0) {
+            values.put(PRODUCTS_COLUMN_ID, aProduct.getBarcode());
+        }
         values.put(PRODUCTS_COLUMN_NAME, aProduct.getTitle());
         values.put(PRODUCTS_COLUMN_INFO, aProduct.getInfo());
         this.insertObject(PRODUCTS_TABLE, values);

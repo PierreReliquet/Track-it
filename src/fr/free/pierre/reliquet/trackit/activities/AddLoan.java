@@ -29,6 +29,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,12 +45,16 @@ import fr.free.pierre.reliquet.trackit.model.Loan;
 import fr.free.pierre.reliquet.trackit.model.Product;
 import fr.free.pierre.reliquet.trackit.utils.InformationFinder;
 import fr.free.pierre.reliquet.trackit.utils.Utils;
-import fr.free.pierre.reliquet.trackit.view.BorrowerAdapter;
+import fr.free.pierre.reliquet.trackit.view.BorrowerAutoComplete;
+import fr.free.pierre.reliquet.trackit.view.ProductAutoComplete;
 
 /**
  * @author Pierre Reliquet
  */
 public class AddLoan extends Activity {
+    
+    public static final String   BARCODE_EXTRA       = "BARCODE_EXTRA";
+    public static final String   TITLE_EXTRA         = "TITLE_EXTRA";
     
     /**
      * The intent barcode
@@ -84,7 +90,9 @@ public class AddLoan extends Activity {
     /**
      * The input to store the title of the product
      */
-    private EditText             productTitle;
+    private AutoCompleteTextView productTitle;
+    
+    private ProductAutoComplete  productAutoComplete;
     
     private ProductsDAO          produtsDAO;
     
@@ -108,8 +116,8 @@ public class AddLoan extends Activity {
         this.borrower = (AutoCompleteTextView) this
                 .findViewById(R.id.add_loan_borrower_name_input);
         this.borrowers = this.borrowerDAO.getAllBorrowers();
-        BorrowerAdapter adapter = new BorrowerAdapter(this,
-                R.layout.borrower_row_layout, this.borrowers);
+        BorrowerAutoComplete adapter = new BorrowerAutoComplete(this,
+                R.layout.autocomplete_row, this.borrowers);
         this.borrower.setThreshold(2);
         this.borrower.setAdapter(adapter);
     }
@@ -120,8 +128,15 @@ public class AddLoan extends Activity {
     private void initializeProductFields() {
         this.scanBarcode = (ImageButton) this.findViewById(R.id.scan_barcode);
         this.productBarcode = (EditText) this.findViewById(R.id.barcode);
-        this.productTitle = (EditText) this
+        
+        // Let's make an autocomplete if the barcode does not exist
+        this.productTitle = (AutoCompleteTextView) this
                 .findViewById(R.id.add_loan_input_title);
+        this.productAutoComplete = new ProductAutoComplete(this,
+                R.layout.autocomplete_row, this.produtsDAO.getAllProducts());
+        this.productTitle.setAdapter(this.productAutoComplete);
+        this.productTitle.setOnItemClickListener(new ProductSelectedListener());
+        
         this.scanBarcode.setOnClickListener(new ScancodeListener());
         this.productInfo = (EditText) this
                 .findViewById(R.id.add_loan_product_additional_info_input);
@@ -133,10 +148,11 @@ public class AddLoan extends Activity {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
                         if (!AddLoan.this.productBarcode.hasFocus()
-                                && !Utils.isNullOrEmpty(productBarcode
-                                        .getText().toString())
-                                && Utils.isNullOrEmpty(productTitle.getText()
-                                        .toString())) {
+                                && !Utils
+                                        .isNullOrEmpty(AddLoan.this.productBarcode
+                                                .getText().toString())
+                                && Utils.isNullOrEmpty(AddLoan.this.productTitle
+                                        .getText().toString())) {
                             AddLoan.this
                                     .parseScanCodeResults(AddLoan.this.productBarcode
                                             .getText().toString());
@@ -153,9 +169,10 @@ public class AddLoan extends Activity {
         if (resultCode != RESULT_CANCELED) {
             if ((requestCode == INTENT_CODE_BARCODE)
                     && (resultCode == RESULT_OK) && (data != null)) {
-                productBarcode.setText(data.getStringExtra("SCAN_RESULT"));
-                borrower.requestFocus();
-                parseScanCodeResults(productBarcode.getText().toString());
+                this.productBarcode.setText(data.getStringExtra("SCAN_RESULT"));
+                this.borrower.requestFocus();
+                this.parseScanCodeResults(this.productBarcode.getText()
+                        .toString());
             }
         }
     }
@@ -176,6 +193,11 @@ public class AddLoan extends Activity {
         this.initializeProductFields();
         this.initializeBorrowerFields();
         this.initializeAddLoanButton();
+        
+        String barcode = this.getIntent().getStringExtra(BARCODE_EXTRA);
+        String title = this.getIntent().getStringExtra(TITLE_EXTRA);
+        this.productBarcode.setText(barcode);
+        this.productTitle.setText(title);
     }
     
     /**
@@ -188,7 +210,7 @@ public class AddLoan extends Activity {
             Toast.makeText(this, this.getString(R.string.internet_looking),
                     Toast.LENGTH_LONG).show();
             tmp = new Product();
-            new InformationFinder(productTitle).execute(contents);
+            new InformationFinder(this.productTitle).execute(contents);
         } else {
             this.productTitle.setText(tmp.getTitle());
         }
@@ -218,15 +240,29 @@ public class AddLoan extends Activity {
         }
         
         private Product createProduct(String barcode, String productName) {
-            Product tmp = AddLoan.this.produtsDAO.getProductByBarcode(barcode);
+            Product tmp = null;
+            if (!Utils.isNullOrEmpty(barcode)) {
+                tmp = AddLoan.this.produtsDAO.getProductByBarcode(barcode);
+            }
             if (tmp == null) {
-                tmp = new Product(Long.parseLong(barcode), productName);
+                if (!Utils.isNullOrEmpty(barcode)) {
+                    // if the barcode exists
+                    tmp = new Product(Long.parseLong(barcode), productName);
+                } else {
+                    // if barcode does not exist
+                    tmp = new Product();
+                    tmp.setTitle(productName);
+                }
                 if (!Utils.isNullOrEmpty(AddLoan.this.productInfo.getText()
                         .toString())) {
                     tmp.setInfo(AddLoan.this.productInfo.getText().toString());
                 }
                 AddLoan.this.produtsDAO.insertProduct(tmp);
-                tmp = AddLoan.this.produtsDAO.getProductByBarcode(barcode);
+                if (Utils.isNullOrEmpty(barcode)) {
+                    tmp = AddLoan.this.produtsDAO.getProductByName(productName);
+                } else {
+                    tmp = AddLoan.this.produtsDAO.getProductByBarcode(barcode);
+                }
             }
             return tmp;
         }
@@ -238,9 +274,7 @@ public class AddLoan extends Activity {
                     .toString();
             String titleText = AddLoan.this.productTitle.getText().toString();
             if (!Utils.isNullOrEmpty(borrowerName)
-                    && !Utils.isNullOrEmpty(barcodeText)
                     && !Utils.isNullOrEmpty(titleText)) {
-                
                 Borrower selectedBorrower = this.createBorrower(borrowerName);
                 Product selectedProduct = this.createProduct(barcodeText,
                         titleText);
@@ -294,5 +328,17 @@ public class AddLoan extends Activity {
                         }).show();
             }
         }
+    }
+    
+    private class ProductSelectedListener implements OnItemClickListener {
+        
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                long arg3) {
+            Product selected = AddLoan.this.productAutoComplete.getProducts()
+                    .get(position);
+            AddLoan.this.productBarcode.setText("" + selected.getBarcode());
+        }
+        
     }
 }

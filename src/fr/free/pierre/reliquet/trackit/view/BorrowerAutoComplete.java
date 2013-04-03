@@ -1,15 +1,14 @@
 /**
  * Copyright 2013 Pierre Reliquet©
  * 
- * Track-it is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) any
- * later version.
+ * Track-it is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  * 
- * Track-it is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
+ * Track-it is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License along with
  * Track-it. If not, see <http://www.gnu.org/licenses/>
@@ -31,7 +30,7 @@ import android.widget.TextView;
 import fr.free.pierre.reliquet.trackit.R;
 import fr.free.pierre.reliquet.trackit.model.Borrower;
 
-public class BorrowerAdapter extends ArrayAdapter<Borrower> {
+public class BorrowerAutoComplete extends ArrayAdapter<Borrower> {
     
     class BorrowerHolder {
         TextView name;
@@ -45,7 +44,7 @@ public class BorrowerAdapter extends ArrayAdapter<Borrower> {
     
     private final List<Borrower> suggestions = new ArrayList<Borrower>();
     
-    public BorrowerAdapter(Context context, int textViewResourceId,
+    public BorrowerAutoComplete(Context context, int textViewResourceId,
             List<Borrower> objects) {
         super(context, textViewResourceId, objects);
         this.borrowers = objects;
@@ -73,8 +72,7 @@ public class BorrowerAdapter extends ArrayAdapter<Borrower> {
             row = inflater.inflate(this.layoutResourceId, parent, false);
         }
         
-        holder.name = (TextView) row
-                .findViewById(R.id.borrower_row_borrower_name);
+        holder.name = (TextView) row.findViewById(R.id.autocomplete_row_name);
         
         Borrower borrower = this.borrowers.get(position);
         
@@ -92,19 +90,20 @@ public class BorrowerAdapter extends ArrayAdapter<Borrower> {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             if (constraint != null) {
-                BorrowerAdapter.this.suggestions.clear();
-                for (Borrower b : BorrowerAdapter.this.borrowers) {
+                BorrowerAutoComplete.this.suggestions.clear();
+                for (Borrower b : BorrowerAutoComplete.this.borrowers) {
                     if (b.getName()
                             .toLowerCase(Locale.getDefault())
-                            .startsWith(
+                            .contains(
                                     constraint.toString().toLowerCase(
                                             Locale.getDefault()))) {
-                        BorrowerAdapter.this.suggestions.add(b);
+                        BorrowerAutoComplete.this.suggestions.add(b);
                     }
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = BorrowerAdapter.this.suggestions;
-                filterResults.count = BorrowerAdapter.this.suggestions.size();
+                filterResults.values = BorrowerAutoComplete.this.suggestions;
+                filterResults.count = BorrowerAutoComplete.this.suggestions
+                        .size();
                 return filterResults;
             } else {
                 return new FilterResults();
@@ -116,11 +115,11 @@ public class BorrowerAdapter extends ArrayAdapter<Borrower> {
                 FilterResults results) {
             ArrayList<Borrower> filteredList = (ArrayList<Borrower>) results.values;
             if ((results != null) && (results.count > 0)) {
-                BorrowerAdapter.this.clear();
+                BorrowerAutoComplete.this.clear();
                 for (Borrower c : filteredList) {
-                    BorrowerAdapter.this.add(c);
+                    BorrowerAutoComplete.this.add(c);
                 }
-                BorrowerAdapter.this.notifyDataSetChanged();
+                BorrowerAutoComplete.this.notifyDataSetChanged();
             }
         }
     }
