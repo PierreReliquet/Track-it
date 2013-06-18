@@ -287,6 +287,7 @@ public class AddLoan extends Activity {
                         Toast.LENGTH_LONG).show();
                 selectedBorrower = null;
                 selectedProduct = null;
+                AddLoan.this.finish();
             }
         }
     }
