@@ -33,24 +33,21 @@
         <TextView
             android:id="@+id/product_list_row_barcode"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_height="wrap_content"
             android:gravity="left"
             android:textIsSelectable="false" />
 
         <TextView
             android:id="@+id/product_list_row_title"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_height="wrap_content"
             android:gravity="left"
             android:textIsSelectable="false" />
 
         <TextView
             android:id="@+id/product_list_row_info"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_height="wrap_content"
             android:gravity="left"
             android:textIsSelectable="false" />
     </LinearLayout>
