@@ -25,6 +25,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import fr.free.pierre.reliquet.trackit.model.Borrower;
 import fr.free.pierre.reliquet.trackit.model.Loan;
+import fr.free.pierre.reliquet.trackit.model.Product;
 import fr.free.pierre.reliquet.trackit.utils.Utils;
 
 /**
@@ -190,6 +191,19 @@ public class LoansDAO extends DBHelper {
         cursor.close();
         this.getReadableDatabase().close();
         return (amount >= 0) ? amount : 0;
+    }
+    
+    public boolean isCurrentLoanForProduct(Product aProduct) {
+    	 Cursor cursor = this.getReadableDatabase().query(
+                 LOANS_TABLE,
+                 new String[] { LOANS_COLUMN_ID },
+                 LOANS_COLUMN_BARCODE + " = ? AND " + LOANS_COLUMN_END_DATE
+                         + " = 0", new String[] { aProduct.getBarcode() + "" },
+                 null, null, LOANS_COLUMN_ID);
+         int amount = cursor.getCount();
+         cursor.close();
+         this.getReadableDatabase().close();
+         return amount > 0;
     }
     
     public void insertLoan(Loan aLoan) {

@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
@@ -206,13 +207,23 @@ public class AddLoan extends Activity {
     private void parseScanCodeResults(String contents) {
         this.productBarcode.setText(contents);
         Product tmp = this.produtsDAO.getProductByBarcode(contents);
-        if (tmp == null) {
+        if (tmp == null) { // if the product is null, it means that it does not exist and we can proceed
             Toast.makeText(this, this.getString(R.string.internet_looking),
                     Toast.LENGTH_LONG).show();
             tmp = new Product();
             new InformationFinder(this.productTitle).execute(contents);
         } else {
-            this.productTitle.setText(tmp.getTitle());
+        	// if the product exists it can be already lent
+        	if(loansDAO.isCurrentLoanForProduct(tmp)) {
+        		// let's check and decline if the product is already lent
+                Toast.makeText(this, this.getString(R.string.loan_existing_for_this_product), Toast.LENGTH_LONG).show();
+                this.productBarcode.setText("");
+                this.productTitle.setText("");
+                return;
+            } else {
+            	this.productTitle.setText(tmp.getTitle());
+                this.productInfo.setText(tmp.getInfo());
+            }
         }
     }
     
