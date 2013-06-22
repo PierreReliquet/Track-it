@@ -56,6 +56,7 @@ public class AddLoan extends Activity {
     
     public static final String   BARCODE_EXTRA       = "BARCODE_EXTRA";
     public static final String   TITLE_EXTRA         = "TITLE_EXTRA";
+    public static final String   INFO_EXTRA         = "INFO_EXTRA";
     
     /**
      * The intent barcode
@@ -195,11 +196,17 @@ public class AddLoan extends Activity {
         this.initializeBorrowerFields();
         this.initializeAddLoanButton();
         
-        String barcode = this.getIntent().getStringExtra(BARCODE_EXTRA);
+        initializeInitParameters();
+    }
+
+	private void initializeInitParameters() {
+		String barcode = this.getIntent().getStringExtra(BARCODE_EXTRA);
         String title = this.getIntent().getStringExtra(TITLE_EXTRA);
+        String info = this.getIntent().getStringExtra(INFO_EXTRA);
         this.productBarcode.setText(barcode);
         this.productTitle.setText(title);
-    }
+        this.productInfo.setText(info);
+	}
     
     /**
      * Parses the result of the barcode activity
