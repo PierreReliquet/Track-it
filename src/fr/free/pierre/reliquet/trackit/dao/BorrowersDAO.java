@@ -154,6 +154,18 @@ public class BorrowersDAO extends DBHelper {
         this.insertObject(BORROWERS_TABLE, values);
     }
     
+    public int getNumberOfBorrowers() {
+    	Cursor cursor = this.getReadableDatabase().query(
+				BORROWERS_TABLE,
+				new String[] { BORROWERS_COLUMN_ID },
+				null , null,
+				null, null, BORROWERS_COLUMN_ID);
+		int amount = cursor.getCount();
+		cursor.close();
+		this.getReadableDatabase().close();
+		return (amount >= 0) ? amount : 0;
+    }
+    
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(BORROWERS_TABLE_CREATE);

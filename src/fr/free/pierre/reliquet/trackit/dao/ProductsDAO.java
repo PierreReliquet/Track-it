@@ -136,6 +136,18 @@ public class ProductsDAO extends DBHelper {
         this.insertObject(PRODUCTS_TABLE, values);
     }
     
+    public int getNumberOfProducts() {
+    	Cursor cursor = this.getReadableDatabase().query(
+				PRODUCTS_TABLE,
+				new String[] { PRODUCTS_COLUMN_ID },
+				null , null,
+				null, null, PRODUCTS_COLUMN_ID);
+		int amount = cursor.getCount();
+		cursor.close();
+		this.getReadableDatabase().close();
+		return (amount >= 0) ? amount : 0;
+    }
+    
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(PRODUCTS_TABLE_CREATE);
