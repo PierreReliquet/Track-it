@@ -44,6 +44,7 @@
     <string name="confirm_closing_content">Do you confirm that the object is back?</string>
     <string name="still_active">Still active</string>
     <string name="loan_existing_for_this_product">There is an existing loan for this product, product cannot be lend.</string>
+    <string name="no_more_loans">Congrats! You have now all your products!</string>
 
     <!-- Product -->
     <string name="product_barcode_hint">Enter the barcode</string>

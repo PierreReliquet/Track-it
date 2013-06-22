@@ -44,6 +44,7 @@
     <string name="confirm_closing_content">Confirmez-vous avoir récupéré votre objet?</string>
     <string name="still_active">En cours</string>
     <string name="loan_existing_for_this_product">Un prêt existe déjà pour cet objet, le prêt est impossible.</string>
+    <string name="no_more_loans">Félicitations, vous avez récupéré tous vos produits!</string>
     
     <!-- Product -->
     <string name="product_barcode_hint">Veuillez saisir le code-barre du produit</string>

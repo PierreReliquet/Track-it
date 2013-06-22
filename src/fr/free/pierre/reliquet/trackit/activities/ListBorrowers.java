@@ -28,6 +28,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import fr.free.pierre.reliquet.trackit.R;
 import fr.free.pierre.reliquet.trackit.dao.BorrowersDAO;
+import fr.free.pierre.reliquet.trackit.enums.CloseLoanFilter;
 import fr.free.pierre.reliquet.trackit.model.Borrower;
 import fr.free.pierre.reliquet.trackit.view.BorrowersAdapter;
 
@@ -73,7 +74,8 @@ public class ListBorrowers extends Activity {
     
     private void startCloseLoan(int positionClicked) {
         Intent closeLoan = new Intent(this, CloseLoan.class);
-        closeLoan.putExtra(CloseLoan.INTENT_CODE_CLOSE_LOAN_BORROWER_ID, ""
+        closeLoan.putExtra(CloseLoan.CLOSE_LOAN_FILTER_EXTRA, CloseLoanFilter.BORROWER.name());
+        closeLoan.putExtra(CloseLoan.BORROWER_ID_EXTRA, ""
                 + this.adapter.getBorrowers().get(positionClicked).getId());
         this.startActivity(closeLoan);
     }

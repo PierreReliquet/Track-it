@@ -23,8 +23,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import fr.free.pierre.reliquet.trackit.R;
+import fr.free.pierre.reliquet.trackit.dao.LoansDAO;
 import fr.free.pierre.reliquet.trackit.model.Product;
 import fr.free.pierre.reliquet.trackit.utils.Utils;
 
@@ -33,62 +35,69 @@ import fr.free.pierre.reliquet.trackit.utils.Utils;
  * 
  */
 public class ProductAdapter extends ArrayAdapter<Product> {
-    
-    private class ProductHolder {
-        TextView barcode;
-        TextView info;
-        TextView title;
-    }
-    
-    private final Context       context;
-    private final int           layoutResourceId;
-    
-    private final List<Product> products;
-    
-    public ProductAdapter(Context context, int textViewResourceId,
-            List<Product> objects) {
-        super(context, textViewResourceId, objects);
-        this.products = objects;
-        this.context = context;
-        this.layoutResourceId = textViewResourceId;
-    }
-    
-    public List<Product> getProducts() {
-        return this.products;
-    }
-    
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        ProductHolder holder = new ProductHolder();
-        
-        if (row == null) {
-            LayoutInflater inflater = ((Activity) this.context)
-                    .getLayoutInflater();
-            row = inflater.inflate(this.layoutResourceId, parent, false);
-        }
-        
-        holder.barcode = (TextView) row
-                .findViewById(R.id.product_list_row_barcode);
-        holder.title = (TextView) row.findViewById(R.id.product_list_row_title);
-        holder.info = (TextView) row.findViewById(R.id.product_list_row_info);
-        
-        Product product = this.products.get(position);
-        
-        holder.barcode.setText(String.format(
-                this.context.getString(R.string.product_barcode),
-                product.getBarcode()));
-        holder.title.setText(String.format(
-                this.context.getString(R.string.product_title),
-                product.getTitle()));
-        if (!Utils.isNullOrEmpty(product.getInfo())) {
-            holder.info.setText(String.format(
-                    this.context.getString(R.string.product_additional_info),
-                    product.getInfo()));
-        } else {
-            holder.info.setVisibility(View.GONE);
-        }
-        return row;
-    }
-    
+
+	private class ProductHolder {
+		TextView barcode;
+		TextView info;
+		TextView title;
+		ImageView action;
+	}
+
+	private final Context context;
+	private final int layoutResourceId;
+
+	private final List<Product> products;
+
+	public ProductAdapter(Context context, int textViewResourceId,
+			List<Product> objects) {
+		super(context, textViewResourceId, objects);
+		this.products = objects;
+		this.context = context;
+		this.layoutResourceId = textViewResourceId;
+	}
+
+	public List<Product> getProducts() {
+		return this.products;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View row = convertView;
+		ProductHolder holder = new ProductHolder();
+
+		if (row == null) {
+			LayoutInflater inflater = ((Activity) this.context)
+					.getLayoutInflater();
+			row = inflater.inflate(this.layoutResourceId, parent, false);
+		}
+
+		holder.barcode = (TextView) row
+				.findViewById(R.id.product_list_row_barcode);
+		holder.title = (TextView) row.findViewById(R.id.product_list_row_title);
+		holder.info = (TextView) row.findViewById(R.id.product_list_row_info);
+		holder.action = (ImageView) row
+				.findViewById(R.id.product_list_row_action_button);
+		Product product = this.products.get(position);
+
+		holder.barcode.setText(String.format(
+				this.context.getString(R.string.product_barcode),
+				product.getBarcode()));
+		holder.title.setText(String.format(
+				this.context.getString(R.string.product_title),
+				product.getTitle()));
+		if(LoansDAO.getInstance()
+				.isCurrentLoanForProduct(product)) {
+			//holder.action.setVisibility(View.INVISIBLE);
+			holder.action.setImageResource(R.drawable.go);
+		}
+		if (!Utils.isNullOrEmpty(product.getInfo())) {
+			holder.info.setText(String.format(
+					this.context.getString(R.string.product_additional_info),
+					product.getInfo()));
+		} else {
+			holder.info.setVisibility(View.GONE);
+		}
+		return row;
+	}
+
 }

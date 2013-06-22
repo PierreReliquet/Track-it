@@ -27,54 +27,78 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import fr.free.pierre.reliquet.trackit.R;
+import fr.free.pierre.reliquet.trackit.dao.LoansDAO;
 import fr.free.pierre.reliquet.trackit.dao.ProductsDAO;
+import fr.free.pierre.reliquet.trackit.enums.CloseLoanFilter;
 import fr.free.pierre.reliquet.trackit.model.Product;
 import fr.free.pierre.reliquet.trackit.view.ProductAdapter;
 
 public class ListProducts extends Activity {
-    
-    private ProductsDAO    productsDAO;
-    private ListView       products;
-    private ProductAdapter productAdapter;
-    
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_list_products);
-        // Show the Up button in the action bar.
-        this.setupActionBar();
-        
-        this.productsDAO = ProductsDAO.getInstance();
-        
-        this.products = (ListView) this.findViewById(R.id.list_products_list);
-        List<Product> productsList = this.productsDAO.getAllProducts();
-        this.productAdapter = new ProductAdapter(this,
-                R.layout.product_list_row_layout, productsList);
-        this.products.setAdapter(this.productAdapter);
-        this.products.setOnItemClickListener(new ProductSelecter());
-    }
-    
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            this.getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
-    
-    private class ProductSelecter implements OnItemClickListener {
-        
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                long id) {
-            Product selected = ListProducts.this.productAdapter.getProducts()
-                    .get(position);
-            Intent addLoan = new Intent(ListProducts.this, AddLoan.class);
-            addLoan.putExtra(AddLoan.BARCODE_EXTRA, selected.getBarcode() + "");
-            addLoan.putExtra(AddLoan.TITLE_EXTRA, selected.getTitle());
-            ListProducts.this.startActivity(addLoan);
-        }
-    }
+
+	private ProductsDAO productsDAO;
+	private ListView products;
+	private ProductAdapter productAdapter;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.activity_list_products);
+		// Show the Up button in the action bar.
+		this.setupActionBar();
+
+		this.productsDAO = ProductsDAO.getInstance();
+
+		initializeProductList();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		initializeProductList();
+	}
+
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void setupActionBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			this.getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+	}
+
+	private void initializeProductList() {
+		this.products = (ListView) this.findViewById(R.id.list_products_list);
+		List<Product> productsList = this.productsDAO.getAllProducts();
+		this.productAdapter = new ProductAdapter(this,
+				R.layout.product_list_row_layout, productsList);
+		this.products.setAdapter(this.productAdapter);
+		this.products.setOnItemClickListener(new ProductSelecter());
+	}
+
+	private class ProductSelecter implements OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			Product selected = ListProducts.this.productAdapter.getProducts()
+					.get(position);
+			if (LoansDAO.getInstance().isCurrentLoanForProduct(selected)) {
+				// let's check and decline if the product is already lent
+				Intent closeLoan = new Intent(ListProducts.this,
+						CloseLoan.class);
+				closeLoan.putExtra(CloseLoan.CLOSE_LOAN_FILTER_EXTRA, CloseLoanFilter.PRODUCT.name());
+				closeLoan.putExtra(CloseLoan.PRODUCT_ID_EXTRA,
+						selected.getBarcode() + "");
+				ListProducts.this.startActivity(closeLoan);
+			} else {
+				Intent addLoan = new Intent(ListProducts.this, AddLoan.class);
+				addLoan.putExtra(AddLoan.BARCODE_EXTRA, selected.getBarcode()
+						+ "");
+				addLoan.putExtra(AddLoan.TITLE_EXTRA, selected.getTitle());
+				addLoan.putExtra(AddLoan.INFO_EXTRA, selected.getInfo());
+				ListProducts.this.startActivity(addLoan);
+			}
+		}
+	}
 }

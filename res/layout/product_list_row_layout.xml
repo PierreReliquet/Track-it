@@ -53,6 +53,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/product_list_row_action_button"
         android:contentDescription="@string/plus"
         android:layout_width="0dp"
         android:layout_height="match_parent"
