@@ -1,19 +1,25 @@
 /**
  * Copyright 2013 Pierre Reliquet©
- * 
+ *
  * Track-it is free software: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * Track-it is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * Track-it. If not, see <http://www.gnu.org/licenses/>
  */
 package fr.free.pierre.reliquet.trackit.utils;
+
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.EditText;
+import fr.free.pierre.reliquet.trackit.BuildConfig;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,39 +28,32 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang.StringEscapeUtils;
-
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.EditText;
-import fr.free.pierre.reliquet.trackit.BuildConfig;
-
 /**
  * @author Pierre Reliquet
- * 
  */
 public class InformationFinder extends AsyncTask<String, Void, String> {
-    
-    private static final String              END_PATTERN           = "</h3>";
-    private static final String              END_SUB_PATTERN       = "</span>";
-    private static final String              SEARCH_LINK           = "http://www.amazon.";
-    private static final String              SEARCH_LINK_END       = "/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=";
-    private static final String              START_PATTERN         = "<div id=\"result_0\"";
-    private static final String              START_SUB_PATTERN     = "<span class=\"lrg bold\"";
-    private static final String              SUB_START_SUB_PATTERN = ">";
+
+    private static final String END_PATTERN = "</h3>";
+    private static final String END_SUB_PATTERN = "</span>";
+    private static final String SEARCH_LINK = "http://www.amazon.";
+    private static final String SEARCH_LINK_END = "/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=";
+    private static final String START_PATTERN = "<div id=\"result_0\"";
+    private static final String START_SUB_PATTERN = "<span class=\"lrg bold\"";
+    private static final String SUB_START_SUB_PATTERN = ">";
     private static final Map<String, String> LANGUAGES;
+
     static {
         LANGUAGES = new HashMap<String, String>();
         LANGUAGES.put("fr", "fr");
         LANGUAGES.put("de", "de");
     }
-    
-    private final EditText                   productTitle;
-    
+
+    private final EditText productTitle;
+
     public InformationFinder(EditText productTitle) {
         this.productTitle = productTitle;
     }
-    
+
     private String internalFindTitleFromBarcode(String barcode, String extension)
             throws Exception {
         URL url = new URL(SEARCH_LINK + extension + SEARCH_LINK_END + barcode);
@@ -87,12 +86,12 @@ public class InformationFinder extends AsyncTask<String, Void, String> {
         }
         return StringEscapeUtils.unescapeHtml(parsing);
     }
-    
+
     @Override
     protected void onPreExecute() {
         this.productTitle.setEnabled(false);
     }
-    
+
     @Override
     protected String doInBackground(String... params) {
         String extension = "";
@@ -110,7 +109,7 @@ public class InformationFinder extends AsyncTask<String, Void, String> {
         }
         return result;
     }
-    
+
     @Override
     protected void onPostExecute(String result) {
         this.productTitle.setText(result);

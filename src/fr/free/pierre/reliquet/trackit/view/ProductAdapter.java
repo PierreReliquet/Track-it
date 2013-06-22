@@ -1,21 +1,19 @@
 /**
  * Copyright 2013 Pierre Reliquet©
- * 
+ *
  * Track-it is free software: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * Track-it is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * Track-it. If not, see <http://www.gnu.org/licenses/>
  */
 package fr.free.pierre.reliquet.trackit.view;
-
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,74 +28,75 @@ import fr.free.pierre.reliquet.trackit.dao.LoansDAO;
 import fr.free.pierre.reliquet.trackit.model.Product;
 import fr.free.pierre.reliquet.trackit.utils.Utils;
 
+import java.util.List;
+
 /**
  * @author Pierre Reliquet
- * 
  */
 public class ProductAdapter extends ArrayAdapter<Product> {
 
-	private class ProductHolder {
-		TextView barcode;
-		TextView info;
-		TextView title;
-		ImageView action;
-	}
+    private class ProductHolder {
+        TextView barcode;
+        TextView info;
+        TextView title;
+        ImageView action;
+    }
 
-	private final Context context;
-	private final int layoutResourceId;
+    private final Context context;
+    private final int layoutResourceId;
 
-	private final List<Product> products;
+    private final List<Product> products;
 
-	public ProductAdapter(Context context, int textViewResourceId,
-			List<Product> objects) {
-		super(context, textViewResourceId, objects);
-		this.products = objects;
-		this.context = context;
-		this.layoutResourceId = textViewResourceId;
-	}
+    public ProductAdapter(Context context, int textViewResourceId,
+                          List<Product> objects) {
+        super(context, textViewResourceId, objects);
+        this.products = objects;
+        this.context = context;
+        this.layoutResourceId = textViewResourceId;
+    }
 
-	public List<Product> getProducts() {
-		return this.products;
-	}
+    public List<Product> getProducts() {
+        return this.products;
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View row = convertView;
-		ProductHolder holder = new ProductHolder();
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View row = convertView;
+        ProductHolder holder = new ProductHolder();
 
-		if (row == null) {
-			LayoutInflater inflater = ((Activity) this.context)
-					.getLayoutInflater();
-			row = inflater.inflate(this.layoutResourceId, parent, false);
-		}
+        if (row == null) {
+            LayoutInflater inflater = ((Activity) this.context)
+                    .getLayoutInflater();
+            row = inflater.inflate(this.layoutResourceId, parent, false);
+        }
 
-		holder.barcode = (TextView) row
-				.findViewById(R.id.product_list_row_barcode);
-		holder.title = (TextView) row.findViewById(R.id.product_list_row_title);
-		holder.info = (TextView) row.findViewById(R.id.product_list_row_info);
-		holder.action = (ImageView) row
-				.findViewById(R.id.product_list_row_action_button);
-		Product product = this.products.get(position);
+        holder.barcode = (TextView) row
+                .findViewById(R.id.product_list_row_barcode);
+        holder.title = (TextView) row.findViewById(R.id.product_list_row_title);
+        holder.info = (TextView) row.findViewById(R.id.product_list_row_info);
+        holder.action = (ImageView) row
+                .findViewById(R.id.product_list_row_action_button);
+        Product product = this.products.get(position);
 
-		holder.barcode.setText(String.format(
-				this.context.getString(R.string.product_barcode),
-				product.getBarcode()));
-		holder.title.setText(String.format(
-				this.context.getString(R.string.product_title),
-				product.getTitle()));
-		if(LoansDAO.getInstance()
-				.isCurrentLoanForProduct(product)) {
-			//holder.action.setVisibility(View.INVISIBLE);
-			holder.action.setImageResource(R.drawable.go);
-		}
-		if (!Utils.isNullOrEmpty(product.getInfo())) {
-			holder.info.setText(String.format(
-					this.context.getString(R.string.product_additional_info),
-					product.getInfo()));
-		} else {
-			holder.info.setVisibility(View.GONE);
-		}
-		return row;
-	}
+        holder.barcode.setText(String.format(
+                this.context.getString(R.string.product_barcode),
+                product.getBarcode()));
+        holder.title.setText(String.format(
+                this.context.getString(R.string.product_title),
+                product.getTitle()));
+        if (LoansDAO.getInstance()
+                .isCurrentLoanForProduct(product)) {
+            //holder.action.setVisibility(View.INVISIBLE);
+            holder.action.setImageResource(R.drawable.go);
+        }
+        if (!Utils.isNullOrEmpty(product.getInfo())) {
+            holder.info.setText(String.format(
+                    this.context.getString(R.string.product_additional_info),
+                    product.getInfo()));
+        } else {
+            holder.info.setVisibility(View.GONE);
+        }
+        return row;
+    }
 
 }

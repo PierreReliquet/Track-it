@@ -1,22 +1,19 @@
 /**
  * Copyright 2013 Pierre Reliquet©
- * 
+ *
  * Track-it is free software: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * Track-it is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * Track-it. If not, see <http://www.gnu.org/licenses/>
  */
 package fr.free.pierre.reliquet.trackit.activities;
-
-import java.util.Date;
-import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -27,16 +24,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
 import fr.free.pierre.reliquet.trackit.R;
 import fr.free.pierre.reliquet.trackit.dao.BorrowersDAO;
 import fr.free.pierre.reliquet.trackit.dao.LoansDAO;
@@ -49,60 +40,63 @@ import fr.free.pierre.reliquet.trackit.utils.Utils;
 import fr.free.pierre.reliquet.trackit.view.BorrowerAutoComplete;
 import fr.free.pierre.reliquet.trackit.view.ProductAutoComplete;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author Pierre Reliquet
  */
 public class AddLoan extends Activity {
-    
-    public static final String   BARCODE_EXTRA       = "BARCODE_EXTRA";
-    public static final String   TITLE_EXTRA         = "TITLE_EXTRA";
-    public static final String   INFO_EXTRA         = "INFO_EXTRA";
-    
+
+    public static final String BARCODE_EXTRA = "BARCODE_EXTRA";
+    public static final String TITLE_EXTRA = "TITLE_EXTRA";
+    public static final String INFO_EXTRA = "INFO_EXTRA";
+
     /**
      * The intent barcode
      */
-    private static final int     INTENT_CODE_BARCODE = 7777;
-    
+    private static final int INTENT_CODE_BARCODE = 7777;
+
     /**
      * The button used to add a new loan
      */
-    private Button               addLoan;
+    private Button addLoan;
     /**
      * The field to autocomplete the available borrowers
      */
     private AutoCompleteTextView borrower;
-    
-    private BorrowersDAO         borrowerDAO;
-    
+
+    private BorrowersDAO borrowerDAO;
+
     /**
      * The list of available borrowers
      */
-    private List<Borrower>       borrowers;
-    private LoansDAO             loansDAO;
+    private List<Borrower> borrowers;
+    private LoansDAO loansDAO;
     /**
      * The input to store the barcode
      */
-    private EditText             productBarcode;
-    
+    private EditText productBarcode;
+
     /**
      * Additional info about the product
      */
-    private EditText             productInfo;
-    
+    private EditText productInfo;
+
     /**
      * The input to store the title of the product
      */
     private AutoCompleteTextView productTitle;
-    
-    private ProductAutoComplete  productAutoComplete;
-    
-    private ProductsDAO          produtsDAO;
-    
+
+    private ProductAutoComplete productAutoComplete;
+
+    private ProductsDAO produtsDAO;
+
     /**
      * The button to launch the barcode scanner
      */
-    private ImageButton          scanBarcode;
-    
+    private ImageButton scanBarcode;
+
     /**
      * Get and setup the add loan button
      */
@@ -110,7 +104,7 @@ public class AddLoan extends Activity {
         this.addLoan = (Button) this.findViewById(R.id.add_loan_button);
         this.addLoan.setOnClickListener(new AddLoanListener());
     }
-    
+
     /**
      * Initializes the borrower name field.
      */
@@ -123,14 +117,14 @@ public class AddLoan extends Activity {
         this.borrower.setThreshold(2);
         this.borrower.setAdapter(adapter);
     }
-    
+
     /**
      * Initializes the products field.
      */
     private void initializeProductFields() {
         this.scanBarcode = (ImageButton) this.findViewById(R.id.scan_barcode);
         this.productBarcode = (EditText) this.findViewById(R.id.barcode);
-        
+
         // Let's make an autocomplete if the barcode does not exist
         this.productTitle = (AutoCompleteTextView) this
                 .findViewById(R.id.add_loan_input_title);
@@ -138,11 +132,11 @@ public class AddLoan extends Activity {
                 R.layout.autocomplete_row, this.produtsDAO.getAllProducts());
         this.productTitle.setAdapter(this.productAutoComplete);
         this.productTitle.setOnItemClickListener(new ProductSelectedListener());
-        
+
         this.scanBarcode.setOnClickListener(new ScancodeListener());
         this.productInfo = (EditText) this
                 .findViewById(R.id.add_loan_product_additional_info_input);
-        
+
         // Add an event to detect when the focus is lost
         // This event is useful if the barcode is typed manually!
         this.productBarcode
@@ -151,10 +145,10 @@ public class AddLoan extends Activity {
                     public void onFocusChange(View v, boolean hasFocus) {
                         if (!AddLoan.this.productBarcode.hasFocus()
                                 && !Utils
-                                        .isNullOrEmpty(AddLoan.this.productBarcode
-                                                .getText().toString())
+                                .isNullOrEmpty(AddLoan.this.productBarcode
+                                        .getText().toString())
                                 && Utils.isNullOrEmpty(AddLoan.this.productTitle
-                                        .getText().toString())) {
+                                .getText().toString())) {
                             AddLoan.this
                                     .parseScanCodeResults(AddLoan.this.productBarcode
                                             .getText().toString());
@@ -162,7 +156,7 @@ public class AddLoan extends Activity {
                     }
                 });
     }
-    
+
     /**
      * Handles the reception of a result by the activity.
      */
@@ -178,7 +172,7 @@ public class AddLoan extends Activity {
             }
         }
     }
-    
+
     /**
      * The initialization of the app
      */
@@ -187,27 +181,27 @@ public class AddLoan extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_add_loan);
         this.setupActionBar();
-        
+
         this.borrowerDAO = BorrowersDAO.getInstance();
         this.produtsDAO = ProductsDAO.getInstance();
         this.loansDAO = LoansDAO.getInstance();
-        
+
         this.initializeProductFields();
         this.initializeBorrowerFields();
         this.initializeAddLoanButton();
-        
+
         initializeInitParameters();
     }
 
-	private void initializeInitParameters() {
-		String barcode = this.getIntent().getStringExtra(BARCODE_EXTRA);
+    private void initializeInitParameters() {
+        String barcode = this.getIntent().getStringExtra(BARCODE_EXTRA);
         String title = this.getIntent().getStringExtra(TITLE_EXTRA);
         String info = this.getIntent().getStringExtra(INFO_EXTRA);
         this.productBarcode.setText(barcode);
         this.productTitle.setText(title);
         this.productInfo.setText(info);
-	}
-    
+    }
+
     /**
      * Parses the result of the barcode activity
      */
@@ -220,20 +214,20 @@ public class AddLoan extends Activity {
             tmp = new Product();
             new InformationFinder(this.productTitle).execute(contents);
         } else {
-        	// if the product exists it can be already lent
-        	if(loansDAO.isCurrentLoanForProduct(tmp)) {
-        		// let's check and decline if the product is already lent
+            // if the product exists it can be already lent
+            if (loansDAO.isCurrentLoanForProduct(tmp)) {
+                // let's check and decline if the product is already lent
                 Toast.makeText(this, this.getString(R.string.loan_existing_for_this_product), Toast.LENGTH_LONG).show();
                 this.productBarcode.setText("");
                 this.productTitle.setText("");
                 return;
             } else {
-            	this.productTitle.setText(tmp.getTitle());
+                this.productTitle.setText(tmp.getTitle());
                 this.productInfo.setText(tmp.getInfo());
             }
         }
     }
-    
+
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
@@ -243,7 +237,7 @@ public class AddLoan extends Activity {
             this.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-    
+
     private class AddLoanListener implements View.OnClickListener {
         private Borrower createBorrower(String borrowerName) {
             Borrower tmp = AddLoan.this.borrowerDAO
@@ -256,7 +250,7 @@ public class AddLoan extends Activity {
             }
             return tmp;
         }
-        
+
         private Product createProduct(String barcode, String productName) {
             Product tmp = null;
             if (!Utils.isNullOrEmpty(barcode)) {
@@ -284,7 +278,7 @@ public class AddLoan extends Activity {
             }
             return tmp;
         }
-        
+
         @Override
         public void onClick(View v) {
             String borrowerName = AddLoan.this.borrower.getText().toString();
@@ -309,7 +303,7 @@ public class AddLoan extends Activity {
             }
         }
     }
-    
+
     private class ScancodeListener implements android.view.View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -348,16 +342,16 @@ public class AddLoan extends Activity {
             }
         }
     }
-    
+
     private class ProductSelectedListener implements OnItemClickListener {
-        
+
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                long arg3) {
+                                long arg3) {
             Product selected = AddLoan.this.productAutoComplete.getProducts()
                     .get(position);
             AddLoan.this.productBarcode.setText("" + selected.getBarcode());
         }
-        
+
     }
 }
