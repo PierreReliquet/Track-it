@@ -17,11 +17,11 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:paddingBottom="5dp"
-    android:paddingTop="5dp" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:paddingBottom="5dp"
+              android:paddingTop="5dp">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -29,7 +29,7 @@
         android:layout_weight="0.95"
         android:orientation="vertical"
         android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
+        android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/borrower_list_row_id"
@@ -37,7 +37,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:gravity="left"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"/>
 
         <TextView
             android:id="@+id/borrower_list_row_name"
@@ -45,7 +45,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:gravity="left"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"/>
 
         <TextView
             android:id="@+id/borrower_list_row_average_time"
@@ -53,7 +53,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:gravity="left"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"/>
 
         <TextView
             android:id="@+id/borrower_list_row_number_loans"
@@ -61,7 +61,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:gravity="left"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"/>
 
         <TextView
             android:id="@+id/borrower_list_row_active_number_loans"
@@ -69,13 +69,14 @@
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:gravity="left"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"/>
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/borrower_list_row_action_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.05"
-        android:src="@drawable/go" />
+        android:src="@drawable/go"/>
 
 </LinearLayout>
