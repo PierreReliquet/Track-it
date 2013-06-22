@@ -25,7 +25,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.90"
+        android:layout_weight="0.93"
         android:orientation="vertical"
         android:paddingBottom="5dp"
         android:paddingTop="5dp" >
@@ -57,7 +57,7 @@
         android:contentDescription="@string/plus"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.10"
+        android:layout_weight="0.07"
         android:src="@drawable/plus" />
 
 </LinearLayout>

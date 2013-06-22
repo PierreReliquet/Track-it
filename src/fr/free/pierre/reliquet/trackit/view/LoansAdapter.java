@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import fr.free.pierre.reliquet.trackit.R;
 import fr.free.pierre.reliquet.trackit.model.Loan;
@@ -38,6 +39,7 @@ public class LoansAdapter extends ArrayAdapter<Loan> {
         TextView endDate;
         TextView product;
         TextView startDate;
+        ImageView actionButton;
     }
 
     private final Context context;
@@ -75,6 +77,7 @@ public class LoansAdapter extends ArrayAdapter<Loan> {
         holder.startDate = (TextView) row
                 .findViewById(R.id.loan_row_start_date);
         holder.endDate = (TextView) row.findViewById(R.id.loan_row_end_date);
+        holder.actionButton = (ImageView) row.findViewById(R.id.loan_row_action_button);
 
         Loan loan = this.loans.get(position);
 
@@ -92,10 +95,12 @@ public class LoansAdapter extends ArrayAdapter<Loan> {
                     .getString(R.string.loan_end_date)
                     + DateFormat.getDateFormat(this.getContext()).format(
                     loan.getEndDate()));
+            holder.actionButton.setVisibility(View.INVISIBLE);
         } else {
             holder.endDate.setText(this.context
                     .getString(R.string.loan_end_date)
                     + this.context.getString(R.string.still_active));
+            holder.actionButton.setVisibility(View.VISIBLE);
         }
 
         return row;
